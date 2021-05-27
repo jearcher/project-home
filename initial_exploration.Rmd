@@ -1,0 +1,47 @@
+---
+title: "Intial Exploration"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Set to source file directory, only workes in RStudio
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+library(tidyverse)
+library(ggplot2)
+library(data.table)
+library(bit64)
+```
+
+
+### Evictions Data 
+2016, few 2017
+```{r}
+evict <- fread("hprm_data/evictions/evictions_rr_all_usable.csv")
+summary(evict)
+# Many 2016 values, some 2017, why? 
+evict %>% count(Year)
+```
+
+
+### Poverty Data
+
+2006-2010. One observation of 9 unnamed variables.
+```{r}
+
+poverty_2006 <- fread("hprm_data/poverty/poverty_2006.csv")
+View(poverty_2006)
+```
+
+
+### Crime
+
+```{r}
+
+```
+
+
+
+
+

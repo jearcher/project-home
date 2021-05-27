@@ -1,0 +1,377 @@
+﻿QUARTER,HOSPITAL_ID,HOSPITAL_NAME,CITY,LICENSED_BEDS,DISCHARGES_MEDICARE,DISCHARGES_MEDICAID,DISCHARGES_TOTAL,ACUTE_PATIENT_DAYS,PATIENT_DAYS,SURGERIES_INPATIENT,SURGERIES_OUTPATIENT,BIRTHS,ER_VISITS,HOME_VISITS
+1,1,Swedish Medical Center - Seattle,Seattle,860,"2,404","1,474","8,966","36,953","40,838","2,802","3,700","1,829","18,020","10,956"
+1,3,Swedish Medical Center - Providence ,Seattle,522,"1,067",301,"2,111","8,025","10,655",727,575,0,"4,756",0
+1,8,Klickitat Valley Hospital,Goldendale,25,66,45,136,296,386,5,23,7,"1,050",646
+1,10,Virginia Mason Medical Center,Seattle,336,"2,006",178,"4,131","16,824","21,135","1,758","2,076",0,"6,489",0
+1,14,Children's Hospital and Regional Medical Center,Seattle,250,22,"1,161","2,758","13,940","16,412","1,117","2,198",0,"9,323",0
+1,21,Newport Community Hospital,Newport,74,59,51,152,335,"4,372",17,0,31,"1,521",0
+1,22,Lourdes Medical Center,Pasco,95,206,196,521,"1,314","1,902",77,623,103,"6,469",0
+1,23,Okanogan-Douglas County Hospital,Okanogan,43,73,102,203,578,647,154,13,42,813,0
+1,26,Peacehealth St. John Medical Center,Longview,346,"1,006",571,"2,360","9,506","9,506",549,"1,502",324,"12,848",0
+1,29,Harborview Medical Center,Seattle,413,"1,203","1,354","4,545","25,091","32,146","2,201",673,0,"20,700",0
+1,32,St. Joseph Medical Center - Tacoma,Tacoma,320,"1,654",987,"5,381","19,358","22,637","1,560","4,329",841,"12,711",0
+1,35,Enumclaw Community Hospital,Enumclaw,38,109,48,264,747,747,106,167,45,"2,939",0
+1,37,Deaconess Medical Center,Spokane,388,"1,280",667,"2,938","16,695","16,695","2,122",0,506,"8,475",0
+1,38,Olympic Medical Hospital,Port Angeles,126,787,181,"1,307","4,692","4,692",483,"1,226",93,"6,187","6,243"
+1,39,Kennewick General Hospital,Kennewick,101,475,717,"1,475","4,796","4,796",227,"1,130",349,"8,055","2,147"
+1,43,Walla Walla General Hospital,Walla Walla,72,278,96,528,"1,478","1,613",184,420,80,"2,637",0
+1,45,Columbia Basin Hospital,Ephrata,58,28,23,61,110,"6,702",0,0,0,751,0
+1,46,Prosser Memorial Hospital,Prosser,26,57,88,184,445,"3,599",46,197,70,"2,511","1,181"
+1,50,St. Mary Medical Center,Walla Walla,141,635,190,"1,248","3,816","5,203",442,"1,230",154,"4,626",0
+1,54,Forks Community Hospital,Forks,45,51,46,136,388,"2,317",3,113,27,"1,211",0
+1,56,Willapa Harbor Hospital,South Bend,26,89,13,126,363,363,9,108,0,989,0
+1,58,Yakima Valley Memorial Hospital,Yakima,226,"1,173",981,"3,206","10,422","11,656",753,"1,079",683,"14,857",0
+1,63,Grays Harbor Community Hospital,Aberdeen,200,644,252,"1,326","4,472","5,781",373,"1,347",142,"7,637",0
+1,78,Samaritan Healthcare,Moses Lake,50,270,342,864,"2,700","2,700",0,"1,017",259,"2,995",0
+1,79,Ocean Beach Hospital ,Ilwaco,25,104,9,150,532,532,38,111,0,"1,546",0
+1,80,Odessa Memorial Hospital,Odessa,44,14,1,21,22,"3,302",0,16,0,72,0
+1,81,Good Samaritan Community Healthcare,Puyallup,225,"1,374",512,"3,350","11,017","12,675",698,548,413,"11,945","7,748"
+1,82,Garfield County Hospital District,Garfield,45,37,7,58,75,"3,317",0,1,0,133,0
+1,84,Providence Everett Medical Center,Everett,362,"2,766",766,"5,791","20,969","22,989","1,502","1,290",822,"21,138",0
+1,85,Jefferson General Hospital,Port Townsend,42,209,46,361,"1,007","1,012",111,273,34,"2,285","2,694"
+1,96,Skyline Hospital,White Salmon,32,130,74,241,546,696,10,176,25,"1,033",0
+1,102,Yakima Regional Medical Center,Yakima,214,693,195,"1,545","5,018","6,242",395,257,0,"6,657","1,884"
+1,104,Valley General Hospital,Monroe,72,246,159,679,"1,290","3,927",174,710,95,"5,016",0
+1,106,Cascade Valley Hospital - Arlington,Arlington,48,223,137,542,"1,638","1,638",180,413,61,"5,618",0
+1,107,North Valley Hospital,Tonasket,129,95,73,204,408,"7,419",22,77,32,757,0
+1,108,Tri-State Memorial Hospital,Clarkston,62,306,18,401,"1,475","1,686",143,312,0,"3,776","1,655"
+1,111,East Adams Rural Hospital,Ritzville,20,19,0,24,66,66,0,0,0,218,0
+1,125,Othello Community Hospital,Othello,49,64,199,350,720,720,10,190,127,"1,713",0
+1,126,Highline Community Hospital,Burien,296,"1,085",359,"2,325","6,633","12,301",522,798,303,"14,874",0
+1,128,University of Washington Medical Ctr.,Seattle,450,"1,260","1,195","4,760","23,367","25,801","1,605","1,936",394,"8,298",0
+1,129,Quincy Valley Medical Center,Quincy,29,25,6,36,76,"1,594",0,0,0,323,0
+1,130,Northwest Hospital,Seattle,323,"1,358",153,"2,399","6,915","9,711",716,934,237,"9,370",0
+1,131,Overlake Hospital Medical Center,Bellevue,337,"1,537",390,"4,431","14,227","15,799","1,348","2,092",930,"13,210",0
+1,132,St. Clare Hospital,Tacoma,106,747,244,"1,680","6,638","6,638",439,796,0,"11,490",0
+1,134,Island Hospital,Anacortes,43,353,96,683,"2,398","2,398",270,948,86,"2,684",0
+1,137,Lincoln Hospital,Davenport,95,90,17,162,314,"6,421",15,55,1,525,0
+1,138,Stevens Healthcare,Edmonds,217,815,317,"1,826","6,103","7,638",443,867,285,"10,521",0
+1,139,Holy Family Hospital ,Spokane,272,"1,171",655,"2,800","9,927","9,927",781,"3,275",265,"15,255",0
+1,140,Kittitas Valley Community Hospital,Kittitas,50,124,64,295,814,860,61,454,71,"2,761","2,832"
+1,141,Dayton General Hospital,Dayton,28,49,0,50,114,438,0,0,0,284,0
+1,142,Harrison Medical Center,Bremerton,297,"2,009",584,"4,299","16,093","16,093","1,506","1,719",478,"16,972","6,884"
+1,145,St. Joseph Hospital-Bellingham,Bellingham,253,"1,472",601,"3,775","12,194","14,853","1,161",452,495,"14,397",0
+1,147,Mid-Valley Hospital,Omak,44,134,131,378,"1,077","1,139",106,217,53,"1,560",0
+1,148,Kindred Hospital Seattle,Seattle,80,56,9,85,"2,287","2,287",0,0,0,0,0
+1,150,Coulee Community Hospital,Grand Coulee,25,39,35,91,228,"1,681",12,53,19,687,0
+1,152,Mason General Hospital,Shelton,68,246,147,495,"1,465","1,465",77,251,91,"4,888",0
+1,153,Whitman Hospital and Medical Center,Colfax,48,190,15,247,879,959,66,173,9,721,"1,659"
+1,155,Valley Medical Center,Renton,303,"1,227",461,"3,899","12,712","12,712","1,161","1,659",718,"18,537",0
+1,156,Whidbey General Hospital,Coupeville,51,214,59,447,"1,424","1,424",146,795,47,"3,817",0
+1,157,St. Luke's Rehabilitation Institute,Spokane,102,324,25,445,"5,215","5,215",0,0,0,0,0
+1,158,Cascade Medical Center - Leavenworth,Leavenworth,12,32,3,42,94,197,0,0,0,590,0
+1,159,Providence St. Peter Hospital,Olympia,390,"2,518",678,"5,058","18,033","21,029","1,001","2,109",420,"16,573",0
+1,161,Kadlec Medical Center,Richland,172,"1,101",681,"2,686","9,860","10,475",842,674,423,"10,766",0
+1,162,Sacred Heart Medical Center,Spokane,623,"2,703","1,747","7,422","30,435","35,850","2,124","1,128",633,"15,787",0
+1,164,Evergreen Healthcare,Kirkland,244,"1,150",434,"3,876","11,965","12,439","1,018",615,"1,133","12,757","11,950"
+1,165,Lake Chelan Community Hospital,Chelan,34,84,24,253,240,"1,706",1,86,23,804,0
+1,167,Ferry County Memorial Hospital,Republic,25,33,15,59,106,"1,214",0,0,0,424,0
+1,168,Central Washington Hospital,Wenatchee,206,"1,306",448,"2,603","8,295","9,539",767,"1,740",340,"7,254",0
+1,170,Southwest Washington Medical Ctr,Vancouver,360,"1,730",964,"5,451","19,558","21,934","1,345","1,671","1,034","24,276","7,327"
+1,172,Pullman Regional Hospital,Pullman,42,118,46,385,961,980,138,0,69,"1,963",0
+1,173,Morton General Hospital,Morton,31,76,10,130,319,"2,024",18,94,9,"1,129",0
+1,175,Mary Bridge Children's Hospital & Health Ctr,Tacoma,72,0,618,"1,107","4,333","4,333",282,0,0,"8,633",0
+1,176,Tacoma General Hospital,Tacoma,521,"1,404","1,153","4,478","20,031","20,031","1,141",0,761,"13,990",0
+1,178,Deer Park Health Center & Hospital,Deer Park,25,34,8,52,122,821,0,25,0,"1,067",0
+1,180,Valley Hospital and Medical Center,Spokane,123,506,213,"1,155","4,407","4,407",838,0,112,"7,627",0
+1,183,Auburn Regional Medical Center,Auburn,149,740,188,"1,668","5,178","6,973",410,514,226,"9,841",0
+1,186,Mark Reed Hospital,McCleary,24,8,1,13,32,32,0,0,0,"1,759",0
+1,191,Providence Centralia Hospital,Centralia,191,568,108,"1,314","3,162","4,497",310,395,131,"7,057",0
+1,193,Mount Carmel Hospital,Colville,50,156,115,308,"1,199","1,281",47,245,52,"1,853",0
+1,194,St. Joseph's Hospital-Chewelah,Chewelah,65,139,45,229,689,"4,464",19,179,13,"1,078",0
+1,195,Snoqualmie Valley Hospital,Snoqualmie,28,74,2,94,60,930,0,19,0,921,0
+1,197,Capital Medical Center,Olympia,119,403,137,"1,240","3,651","4,108",545,748,196,"3,768",0
+1,198,Sunnyside Community Hospital,Sunnyside,38,126,208,416,"1,185","1,185",357,251,129,"4,334",0
+1,199,Toppenish Community Hospital,Toppenish,63,136,235,600,"1,576","1,576",90,152,127,"5,424",0
+1,201,St. Francis Hospital,Federal Way,110,520,389,"1,875","5,895","6,620",441,"1,426",358,"11,238",0
+1,202,Regional Hosp for Respiratory & Complex Care,Tukwila,27,22,0,39,"2,244","2,244",0,0,0,0,0
+1,204,Seattle Cancer Care Alliance,Seattle,20,29,6,124,"1,598","1,598",9,0,0,0,0
+1,205,Wenatchee Valley Hospital,Wenatchee,20,118,23,314,458,872,240,"1,147",0,0,0
+1,206,United General Hospital,Sedro Woolley,97,220,47,365,827,"1,455",34,350,0,"4,118",0
+1,207,Skagit Valley Hospital,Mt. Vernon,137,580,555,"1,923","5,903","6,889",641,765,300,"7,267",0
+1,208,Legacy Salmon Creek Hospital,Vancouver,165,563,394,"1,807","6,376","6,376",366,447,349,"7,921",0
+1,904,Fairfax Hospital,Kirkland,133,67,143,541,"4,813","4,813",0,0,0,0,0
+1,915,Lourdes Counseling Center,Richland,32,25,77,173,0,"2,165",0,0,0,0,0
+1,919,West Seattle Psychiatric Hospital,Seattle,40,23,124,196,0,"2,884",0,0,0,0,0
+2,1,Swedish Medical Center,Seattle,860,"2,202","1,479","8,717","34,167","37,376","2,695","3,962","1,982","18,724","9,380"
+2,3,Swedish Providence Medical Center ,Seattle,522,"1,034",289,"2,100","8,182","10,037",812,502,0,"4,785",0
+2,8,Klickitat Valley Hospital,Goldendale,25,61,26,134,328,568,3,21,6,"1,120",827
+2,10,Virginia Mason Medical Center,Seattle,336,"1,932",131,"4,058","16,187","20,435","1,896","1,971",0,"6,523",0
+2,14,Children's Hospital & Reg Medical Center,Seattle,250,28,"1,018","3,282","18,761","18,761",690,"2,210",0,"8,025",0
+2,21,Newport Community Hospital,Newport,74,79,38,150,330,"4,975",9,0,24,"1,832",0
+2,22,Lourdes Medical Center,Pasco,95,204,180,512,"1,281","1,930",80,571,123,"6,243",0
+2,23,Okanogan-Douglas County Hospital,Okanogan,43,64,93,198,493,564,172,18,48,908,0
+2,26,Peacehealth St. John Medical Center,Longview,346,982,551,"2,251","9,154","9,154",544,"1,425",303,"12,607",0
+2,29,Harborview Medical Center,Seattle,413,"1,180","1,304","4,702","25,225","32,635","2,362",735,0,"20,391",0
+2,32,Saint Joseph Medical Center,Tacoma,320,"1,645","1,009","5,475","19,424","22,701","1,430","4,228",963,"12,559",0
+2,35,Enumclaw Community Hospital,Enumclaw,38,125,61,264,786,786,90,178,53,"2,963",0
+2,37,Deaconess Medical Center,Spokane,388,"1,251",743,"3,010","18,306","18,306","2,133",0,581,"8,951",0
+2,38,Olympic Memorial Hospital,Port Angeles,126,786,200,"1,293","4,280","4,280",481,"1,147",139,"6,487","5,579"
+2,39,Kennewick General Hospital,Kennewick,101,435,614,"1,336","4,255","4,255",229,819,361,"7,652","2,119"
+2,43,Walla Walla General Hospital,Walla Walla,72,256,104,505,"1,544","1,617",181,371,93,"2,702",0
+2,45,Columbia Basin Hospital,Ephrata,58,32,10,57,87,"6,693",0,0,0,893,0
+2,46,Prosser Memorial Hospital,Prosser,26,52,105,191,407,"3,556",53,206,92,"2,409","1,231"
+2,50,Saint Mary Medical Center,Walla Walla,141,563,170,"1,140","3,641","5,091",443,"1,128",146,"4,457",0
+2,54,Forks Community Hospital,Forks,45,38,37,107,280,"2,185",6,132,24,"1,015",0
+2,56,Willapa Harbor Hospital,South Bend,26,112,8,142,417,417,7,112,0,994,0
+2,58,Yakima Valley Memorial,Yakima,226,"1,151",889,"3,217","10,934","12,112",791,"1,772",828,"14,460",0
+2,63,Grays Harbor Community Hospital,Aberdeen,200,614,240,"1,293","4,292","5,661",432,"1,181",126,"7,730",0
+2,78,Samaritan Hospital,Moses Lake,50,259,296,816,"2,425","2,425",0,941,278,"2,992",0
+2,79,Ocean Beach Hospital ,Ilwaco,25,88,12,132,460,460,34,170,0,"1,655",0
+2,80,Odessa Memorial Hospital,Odessa,44,9,7,25,18,"3,277",0,6,0,116,0
+2,81,Good Samaritan Community Healthcare,Puyallup,225,"1,404",471,"3,506","11,175","12,728",799,438,469,"12,327","7,330"
+2,82,Garfield County Public Hospital District,Garfield,45,33,7,49,70,"3,348",0,0,0,203,0
+2,84,Providence Everett Medical Center,Everett,362,"2,819",820,"5,960","21,952","23,972","1,609","1,348",984,"20,700",0
+2,85,Jefferson General Hospital,Port Townsend,42,203,52,368,999,999,128,293,34,"2,347","2,471"
+2,96,Skyline Hospital,White Salmon,32,80,25,152,394,493,8,164,12,"1,080",0
+2,102,Yakima Regional Medical Center,Yakima,214,610,181,"1,417","5,088","6,117",437,259,0,"6,687","1,802"
+2,104,Valley General Hospital,Monroe,72,236,98,679,"1,241","3,929",177,668,117,"5,470",0
+2,106,Cascade Valley Hospital,Arlington,48,234,149,534,"1,489","1,489",170,379,79,"5,478",0
+2,107,North Valley Hospital,Tonasket,129,107,81,227,377,"7,509",20,92,28,755,0
+2,108,Tri-State Memorial Hospital,Clarkston,62,307,23,393,"1,394","1,517",158,356,0,"3,795","1,599"
+2,111,East Adams Rural Hospital,Ritzville,20,28,2,34,87,95,0,0,0,240,0
+2,125,Othello Community Hospital,Othello,49,52,190,316,690,690,12,168,143,"1,749",0
+2,126,Highline Community Hospital,Burien,296,"1,078",396,"2,374","6,480","11,665",561,705,371,"14,944",0
+2,128,University of Washington Medical Ctr.,Seattle,450,"1,297","1,273","4,873","24,464","26,827","1,597","1,954",455,"8,329",0
+2,129,Quincy Valley Hospital,Quincy,29,25,6,36,76,"1,594",0,0,0,323,0
+2,130,Northwest Hospital,Seattle,323,"1,355",158,"2,401","7,015","9,935",733,870,254,"9,065",0
+2,131,Overlake Hospital Medical Center,Bellevue,337,"1,547",337,"4,392","14,547","16,025","1,403","2,121","1,028","12,953",0
+2,132,Saint Clare Hospital,Tacoma,106,789,242,"1,701","6,288","6,288",442,728,0,"11,468",0
+2,134,Island Hospital,Anacortes,43,335,113,724,"2,512","2,512",263,953,89,"2,763",0
+2,137,Lincoln Hospital,Davenport,95,65,19,121,227,"6,197",20,126,0,636,0
+2,138,Stevens Healthcare,Edmonds,217,822,382,"2,006","6,687","8,199",506,875,313,"10,370",0
+2,139,Holy Family Hospital ,Spokane,272,"1,140",475,"2,686","9,519","9,519",757,"3,248",283,"16,022",0
+2,140,Kittitas Valley Community Hospital,Kittitas,50,122,63,318,839,839,68,471,93,"2,725","3,035"
+2,141,Dayton General Hospital,Dayton,28,40,3,45,89,468,0,0,0,327,0
+2,142,Harrison Memorial Hospital,Bremerton,297,"2,018",581,"4,318","15,391","15,391","1,520","1,563",534,"17,017","6,977"
+2,145,Saint Joseph Hospital-Bellingham,Bellingham,253,"1,528",623,"3,918","11,940","14,406","1,183",406,530,"14,425",0
+2,147,Mid-Valley Hospital,Omak,44,134,148,403,"1,137","1,157",130,242,56,"1,806",0
+2,148,Kindred Hospital Seattle,Seattle,80,49,7,80,"2,389","2,389",0,0,0,0,0
+2,150,Coulee Community Hospital,Grand Coulee,25,49,26,97,266,"1,609",12,51,22,739,0
+2,152,Mason General Hospital,Shelton,68,222,115,458,"1,423","1,423",109,222,77,"5,734",0
+2,153,Whitman Hospital and Medical Center,Colfax,48,157,14,228,736,766,84,191,11,781,"1,513"
+2,155,Valley Medical Center,Renton,303,"1,202",490,"4,011","12,689","12,689","1,196","1,645",924,"18,741",0
+2,156,Whidbey General Hospital,Coupeville,51,195,48,440,"1,381","1,381",152,818,47,"3,779",0
+2,157,Saint Luke's Rehabilitation Institute,Spokane,102,300,30,431,"5,502","5,502",0,0,0,0,0
+2,158,Cascade Medical Center,Leavenworth,12,34,0,39,66,103,0,0,0,737,0
+2,159,Providence St. Peter Hospital,Olympia,390,"2,356",584,"4,749","16,660","19,548","1,031",957,539,"15,956",0
+2,161,Kadlec Medical Center,Richland,172,"1,056",625,"2,680","9,427","10,073",880,650,477,"10,596",0
+2,162,Sacred Heart Medical Center,Spokane,623,"2,526","1,690","7,201","31,101","36,310","2,380","1,077",670,"15,470",0
+2,164,Evergreen Hospital Medical Center,Kirkland,244,"1,118",390,"3,935","12,586","13,010","1,021",638,"1,264","12,838","11,859"
+2,165,Lake Chelan Community Hospital,Chelan,34,93,29,246,980,"1,387",10,87,28,"1,054",0
+2,167,Ferry County Memorial Hospital,Republic,25,28,9,45,69,"1,192",0,0,0,387,0
+2,168,Central Washington Hospital,Wenatchee,206,"1,281",427,"2,492","8,297","9,477",672,"1,624",322,"7,515",0
+2,170,Southwest Washington Medical Ctr,Vancouver,360,"1,685",870,"5,336","19,261","21,577","1,339","1,793",985,"23,153","6,223"
+2,172,Pullman Memorial Hospital,Pullman,42,113,56,385,"1,053","1,062",170,0,101,"1,892",0
+2,173,Morton General Hospital,Morton,31,77,7,122,308,"1,975",17,80,5,"1,225",0
+2,175,Mary Bridge Children's Hospital,Tacoma,72,0,499,892,"3,441","3,441",310,0,0,"7,001",0
+2,176,Tacoma General Allenmore Hospital,Tacoma,521,"1,341","1,217","4,522","19,589","19,589","1,057",0,839,"13,550",0
+2,178,Deer Park Hospital,Deer Park,25,23,9,40,56,930,0,21,0,"1,239",0
+2,180,Valley Hospital and Medical Center,Spokane,123,515,208,"1,159","4,197","4,197",768,0,127,"7,166",0
+2,183,Auburn Regional Medical Center,Auburn,149,722,210,"1,667","5,041","6,797",355,481,250,"9,724",0
+2,186,Mark Reed Hospital,McCleary,24,7,1,8,10,10,0,0,0,"1,632",0
+2,191,Providence Centralia Hospital,Centralia,191,552,114,"1,317","2,945","4,361",356,366,138,"7,405",0
+2,193,Mount Carmel Hospital,Colville,50,165,115,305,"1,086","1,107",74,234,56,"2,049",0
+2,194,Saint Joseph's Hospital-Chewelah,Chewelah,65,125,39,208,620,"4,269",12,149,18,"1,132",0
+2,195,Snoqualmie Valley Hospital,Snoqualmie,28,85,1,99,71,"1,096",0,100,0,979,0
+2,197,Capital Medical Center,Olympia,119,421,161,"1,300","3,576","3,986",572,659,209,"3,746",0
+2,198,Sunnyside Community Hospital,Sunnyside,38,117,209,426,"1,122","1,122",354,446,195,"4,499",0
+2,199,Toppenish Community Hospital,Toppenish,63,104,280,619,"1,510","1,510",106,158,167,"5,287",0
+2,201,Saint Francis Hospital,Federal Way,110,491,411,"1,949","5,642","6,340",420,"1,419",356,"11,491",0
+2,202,Regional Hospital,Tukwila,27,29,0,39,"2,262","2,262",0,0,0,0,0
+2,204,Seattle Cancer Care Alliance,Seattle,20,30,9,128,"1,369","1,369",8,0,0,3,0
+2,205,Wenatchee Valley Hospital,Wenatchee,20,110,26,305,428,854,241,"1,118",0,0,0
+2,206,United General Hospital,Sedro Woolley,97,207,41,383,858,"1,585",41,383,0,"4,137",0
+2,207,Skagit Valley Hospital,Mt. Vernon,137,574,530,"1,861","5,906","6,687",621,759,306,"7,254",0
+2,208,Legacy Salmon Creek Hospital,Vancouver,165,578,528,"1,913","6,421","6,421",388,562,404,"8,767",0
+2,904,BHC Fairfax Hospital,Kirkland,133,59,149,525,"4,574","4,574",0,0,0,0,0
+2,915,Lourdes Counseling Center,Richland,32,26,65,149,0,"2,038",0,0,0,0,0
+2,919,West Seattle Psychiatric Hospital,Seattle,40,63,86,191,0,"2,870",0,0,0,0,0
+3,1,Swedish Medical Center,Seattle,860,"1,871","1,066","8,333","32,331","34,117","2,545","3,700","1,957","19,295","10,554"
+3,3,Swedish Providence Medical Center ,Seattle,522,"1,226",261,"2,268","7,905","9,710",781,519,0,"4,562",0
+3,8,Klickitat Valley Hospital,Goldendale,25,73,45,160,382,537,5,21,8,"1,200",786
+3,10,Virginia Mason Medical Center,Seattle,336,"2,091",180,"4,201","16,084","20,148","1,741","2,084",0,"6,606",0
+3,14,Children's Hospital & Reg Medical Center,Seattle,250,21,"1,016","2,501","13,448","16,203","1,332","2,187",0,"7,176",0
+3,21,Newport Community Hospital,Newport,74,95,36,182,381,"4,889",12,0,29,"2,025",0
+3,22,Lourdes Medical Center,Pasco,95,195,219,525,"1,350","1,942",74,554,127,"6,473",0
+3,23,Okanogan-Douglas County Hospital,Okanogan,43,53,112,210,563,585,195,26,63,"1,073",0
+3,26,Peacehealth St. John Medical Center,Longview,346,997,591,"2,336","8,943","8,943",571,"1,333",352,"12,903",0
+3,29,Harborview Medical Center,Seattle,413,"1,110","1,165","4,701","26,068","33,471","2,669",674,0,"18,225",0
+3,32,Saint Joseph Medical Center,Tacoma,320,"1,650","1,028","5,386","19,565","22,845","1,448","4,104",963,"12,632",0
+3,35,Enumclaw Community Hospital,Enumclaw,38,103,40,243,657,657,89,170,59,"3,022",0
+3,37,Deaconess Medical Center,Spokane,388,"1,214",715,"2,949","16,269","16,269","2,084",0,563,"9,057",0
+3,38,Olympic Memorial Hospital,Port Angeles,126,686,161,"1,172","4,078","4,078",473,"1,087",131,"6,378","5,357"
+3,39,Kennewick General Hospital,Kennewick,101,424,644,"1,405","3,995","3,995",245,827,394,"8,024","1,996"
+3,43,Walla Walla General Hospital,Walla Walla,72,207,94,460,"1,397","1,442",175,388,68,"2,701",0
+3,45,Columbia Basin Hospital,Ephrata,58,42,14,71,94,"6,424",0,0,0,"1,016",0
+3,46,Prosser Memorial Hospital,Prosser,26,66,103,227,520,"3,700",69,191,88,"2,397","1,071"
+3,50,Saint Mary Medical Center,Walla Walla,141,544,192,"1,123","3,618","4,945",393,"1,107",160,"4,959",0
+3,54,Forks Community Hospital,Forks,45,61,30,132,357,"2,328",7,111,24,"1,190",0
+3,56,Willapa Harbor Hospital,South Bend,26,79,17,116,322,332,9,122,0,957,0
+3,58,Yakima Valley Memorial,Yakima,226,"1,101",905,"3,045","10,615","11,944",764,"1,881",772,"14,779",0
+3,63,Grays Harbor Community Hospital,Aberdeen,200,592,231,"1,267","4,121","5,581",439,"1,181",149,"8,275",0
+3,78,Samaritan Hospital,Moses Lake,50,239,344,851,"2,614","2,614",0,916,290,"3,334",0
+3,79,Ocean Beach Hospital ,Ilwaco,25,93,11,137,471,471,49,166,0,"1,894",0
+3,80,Odessa Memorial Hospital,Odessa,44,16,7,30,31,"3,188",0,6,0,91,0
+3,81,Good Samaritan Community Healthcare,Puyallup,225,"1,446",436,"3,350","11,145","12,594",767,497,511,"12,136","6,373"
+3,82,Garfield County Public Hospital District,Garfield,45,23,3,37,24,"3,715",0,0,0,175,0
+3,84,Providence Everett Medical Center,Everett,362,"2,807",714,"5,757","22,004","24,024","1,515","1,265",965,"20,722",0
+3,85,Jefferson General Hospital,Port Townsend,42,210,35,364,"1,041","1,041",142,297,34,"2,261","2,514"
+3,96,Skyline Hospital,White Salmon,32,84,60,202,471,643,9,151,24,"1,205",0
+3,102,Yakima Regional Medical Center,Yakima,214,680,209,"1,506","5,363","6,276",447,234,0,"6,892","1,786"
+3,104,Valley General Hospital,Monroe,72,205,107,634,"1,200","3,703",197,676,95,"5,134",0
+3,106,Cascade Valley Hospital,Arlington,48,183,93,475,"1,319","1,319",176,336,95,"5,567",0
+3,107,North Valley Hospital,Tonasket,129,87,90,216,380,"7,555",21,68,39,928,0
+3,108,Tri-State Memorial Hospital,Clarkston,62,310,25,388,"1,493","1,735",142,385,0,"3,843","1,598"
+3,111,East Adams Rural Hospital,Ritzville,20,23,3,32,82,82,0,0,0,258,0
+3,125,Othello Community Hospital,Othello,49,39,181,318,710,710,13,67,140,"1,961",0
+3,126,Highline Community Hospital,Burien,296,977,390,"2,314","6,194","11,525",532,718,343,"15,023",0
+3,128,University of Washington Medical Ctr.,Seattle,450,"1,391","1,282","5,111","24,732","27,042","1,722","1,709",474,"7,135",0
+3,129,Quincy Valley Hospital,Quincy,29,14,12,29,65,"1,678",0,0,0,"1,015",0
+3,130,Northwest Hospital,Seattle,323,"1,298",159,"2,401","6,897","9,720",720,899,287,"9,187",0
+3,131,Overlake Hospital Medical Center,Bellevue,337,"1,376",376,"4,280","13,493","14,575","1,412","1,983","1,022","12,860",0
+3,132,Saint Clare Hospital,Tacoma,106,712,254,"1,679","6,401","6,401",456,782,0,"11,068",0
+3,134,Island Hospital,Anacortes,43,307,120,720,"2,393","2,393",314,880,97,"2,951",0
+3,137,Lincoln Hospital,Davenport,95,90,151,341,265,"6,507",20,108,0,755,0
+3,138,Stevens Healthcare,Edmonds,217,745,469,"1,897","6,328","7,517",469,818,313,"10,874",0
+3,139,Holy Family Hospital ,Spokane,272,"1,178",496,"2,735","9,415","9,415",718,"3,204",308,"16,347",0
+3,140,Kittitas Valley Community Hospital,Kittitas,50,126,66,325,895,918,74,414,79,"3,129","2,999"
+3,141,Dayton General Hospital,Dayton,28,18,1,29,69,190,0,0,0,374,0
+3,142,Harrison Memorial Hospital,Bremerton,297,"2,003",568,"4,263","15,075","15,075","1,546","1,584",548,"17,355","7,253"
+3,145,Saint Joseph Hospital-Bellingham,Bellingham,253,"1,475",602,"3,785","11,612","13,905","1,200",470,533,"14,519",0
+3,147,Mid-Valley Hospital,Omak,44,139,157,415,"1,155","1,191",139,257,69,"2,201",0
+3,148,Kindred Hospital Seattle,Seattle,80,50,0,80,"1,941","1,941",0,0,0,0,0
+3,150,Coulee Community Hospital,Grand Coulee,25,49,26,107,236,"1,635",21,45,22,889,0
+3,152,Mason General Hospital,Shelton,68,230,115,475,"1,431","1,431",125,225,79,"5,576",0
+3,153,Whitman Hospital and Medical Center,Colfax,48,128,20,191,674,730,70,153,6,795,"1,151"
+3,155,Valley Medical Center,Renton,303,"1,146",563,"4,337","12,014","12,014","1,097","1,504",952,"18,418",0
+3,156,Whidbey General Hospital,Coupeville,51,234,41,469,"1,514","1,514",150,"1,008",44,"4,104",0
+3,157,Saint Luke's Rehabilitation Institute,Spokane,102,263,31,374,"5,371","5,371",0,0,0,0,0
+3,158,Cascade Medical Center,Leavenworth,12,35,1,39,71,157,0,0,0,902,0
+3,159,Providence St. Peter Hospital,Olympia,390,"2,350",513,"4,499","16,973","19,943","1,091",760,507,"15,969",0
+3,161,Kadlec Medical Center,Richland,172,974,664,"2,557","9,369","10,113",889,690,462,"10,931",0
+3,162,Sacred Heart Medical Center,Spokane,623,"2,444","1,611","7,089","30,926","35,490","2,524",942,717,"15,667",0
+3,164,Evergreen Hospital Medical Center,Kirkland,244,"1,148",397,"3,732","12,267","12,873",953,639,"1,183","12,740","12,283"
+3,165,Lake Chelan Community Hospital,Chelan,34,77,17,208,"1,387","1,437",4,91,23,"1,435",0
+3,167,Ferry County Memorial Hospital,Republic,25,35,12,61,121,"1,245",0,0,0,507,0
+3,168,Central Washington Hospital,Wenatchee,206,"1,262",513,"2,639","9,001","10,398",658,"1,539",356,"7,427",0
+3,170,Southwest Washington Medical Ctr,Vancouver,360,"1,978",865,"5,252","19,000","21,416","1,380",981,974,"22,575","5,577"
+3,172,Pullman Memorial Hospital,Pullman,42,98,42,340,"1,057","1,099",162,0,88,"1,947",0
+3,173,Morton General Hospital,Morton,31,86,9,145,312,"2,005",14,78,8,"1,485",0
+3,175,Mary Bridge Children's Hospital,Tacoma,72,0,428,876,"3,144","3,144",315,0,0,"6,674",0
+3,176,Tacoma General Allenmore Hospital,Tacoma,521,"1,333","1,184","4,453","20,021","20,021","1,096",0,822,"13,479",0
+3,178,Deer Park Hospital,Deer Park,25,27,5,40,44,920,0,11,0,"1,344",0
+3,180,Valley Hospital and Medical Center,Spokane,123,508,222,"1,155","4,295","4,295",604,0,137,"7,494",0
+3,183,Auburn Regional Medical Center,Auburn,149,742,265,"1,721","5,519","7,501",434,493,241,"10,126",0
+3,186,Mark Reed Hospital,McCleary,24,3,0,3,5,5,0,0,0,"1,707",0
+3,191,Providence Centralia Hospital,Centralia,191,543,105,"1,317","3,096","4,363",312,338,140,"7,441",0
+3,193,Mount Carmel Hospital,Colville,50,104,88,253,912,971,75,222,40,"2,097",0
+3,194,Saint Joseph's Hospital-Chewelah,Chewelah,65,120,31,180,548,"4,278",8,169,14,"1,357",0
+3,195,Snoqualmie Valley Hospital,Snoqualmie,28,97,6,122,104,"1,229",0,111,0,"1,052",0
+3,197,Capital Medical Center,Olympia,119,361,156,"1,200","3,647","3,781",509,573,207,"3,838",0
+3,198,Sunnyside Community Hospital,Sunnyside,38,124,212,425,"1,113","1,113",375,230,179,"4,621",0
+3,199,Toppenish Community Hospital,Toppenish,63,100,279,552,"1,362","1,362",75,167,124,"5,315",0
+3,201,Saint Francis Hospital,Federal Way,110,537,354,"1,901","5,825","6,478",457,"1,362",368,"11,367",0
+3,202,Regional Hospital,Tukwila,27,23,1,32,"2,171","2,171",0,0,0,0,0
+3,204,Seattle Cancer Care Alliance,Seattle,20,15,6,84,"1,179","1,179",12,0,0,0,0
+3,205,Wenatchee Valley Hospital,Wenatchee,20,115,18,262,390,818,203,"1,080",0,0,0
+3,206,United General Hospital,Sedro Woolley,97,182,45,366,906,"1,604",56,374,0,"4,247",0
+3,207,Skagit Valley Hospital,Mt. Vernon,137,532,503,"1,765","5,383","6,322",623,774,366,"7,248",0
+3,208,Legacy Salmon Creek Hospital,Vancouver,165,635,573,"2,046","7,639","7,639",451,615,444,"9,623",0
+3,904,BHC Fairfax Hospital,Kirkland,133,59,143,510,"5,188","5,188",0,0,0,0,0
+3,915,Lourdes Counseling Center,Richland,32,32,79,171,0,"2,241",0,0,0,0,0
+3,919,West Seattle Psychiatric Hospital,Seattle,40,35,94,179,0,"2,925",0,0,0,0,0
+4,1,Swedish Medical Center,Seattle,860,1788,942,8439,33517,35167,2698,3873,1867,18692,9494
+4,3,Swedish Providence Medical Center ,Seattle,522,"1,215",258,"2,291","8,670","10,313",764,539,0,"4,475",0
+4,8,Klickitat Valley Hospital,Goldendale,25,89,54,179,430,606,7,19,16,"1,128",750
+4,10,Virginia Mason Medical Center,Seattle,336,"2,028",212,"4,287","17,065","21,121","1,756","1,916",0,"6,565",0
+4,14,Children's Hospital & Reg Medical Center,Seattle,250,22,"1,006","2,443","12,737","15,275","1,117","2,172",0,"7,402",0
+4,21,Newport Community Hospital,Newport,74,94,34,176,436,"4,771",19,0,28,"1,707",0
+4,22,Lourdes Medical Center,Pasco,95,200,177,510,"1,288","1,632",76,589,103,"5,702",0
+4,23,Okanogan-Douglas County Hospital,Okanogan,43,59,108,206,539,585,177,21,53,790,0
+4,26,Peacehealth St. John Medical Center,Longview,346,994,506,"2,230","8,722","8,722",549,"1,263",287,"12,362",0
+4,29,Harborview Medical Center,Seattle,413,"1,171","1,246","4,545","25,807","33,330","2,334",688,0,"19,736",0
+4,32,Saint Joseph Medical Center,Tacoma,320,"1,667",975,"5,430","19,349","22,784","1,400","4,123",927,"12,756",0
+4,35,Enumclaw Community Hospital,Enumclaw,38,135,32,264,826,826,91,207,49,"2,898",0
+4,37,Deaconess Medical Center,Spokane,388,"1,337",644,"2,995","16,782","16,782","2,091",0,498,"8,685",0
+4,38,Olympic Memorial Hospital,Port Angeles,126,734,152,"1,209","4,250","4,250",479,"1,091",113,"6,017","5,652"
+4,39,Kennewick General Hospital,Kennewick,101,444,715,"1,446","4,193","4,193",285,835,420,"7,948","1,964"
+4,43,Walla Walla General Hospital,Walla Walla,72,250,87,497,"1,422","1,463",174,386,75,"2,464",0
+4,45,Columbia Basin Hospital,Ephrata,58,27,12,53,82,"6,328",0,0,0,768,0
+4,46,Prosser Memorial Hospital,Prosser,26,67,76,200,453,"3,565",53,180,91,"2,089","1,297"
+4,50,Saint Mary Medical Center,Walla Walla,141,549,178,"1,124","3,718","4,932",406,"1,202",164,"4,499",0
+4,54,Forks Community Hospital,Forks,45,50,49,146,361,"3,221",8,0,29,0,0
+4,56,Willapa Harbor Hospital,South Bend,26,89,14,131,419,419,4,102,0,933,0
+4,58,Yakima Valley Memorial,Yakima,226,"1,054",957,"3,074","10,112","11,250",728,"2,047",738,"14,264",0
+4,63,Grays Harbor Community Hospital,Aberdeen,200,633,247,"1,333","4,274","5,556",346,"1,098",152,"7,837",0
+4,78,Samaritan Hospital,Moses Lake,50,254,313,816,"2,208","2,208",0,966,256,"3,155",0
+4,79,Ocean Beach Hospital ,Ilwaco,25,84,16,124,396,396,25,91,0,"1,634",0
+4,80,Odessa Memorial Hospital,Odessa,44,9,5,19,20,"3,013",0,11,0,77,0
+4,81,Good Samaritan Community Healthcare,Puyallup,225,"1,405",445,"3,426","12,089","13,831",819,520,467,"11,234","6,503"
+4,82,Garfield County Public Hospital District,Garfield,45,18,6,32,53,"3,606",0,0,0,127,0
+4,84,Providence Everett Medical Center,Everett,362,"2,989",752,"6,112","22,231","24,251","1,581","1,343",972,"20,958",0
+4,85,Jefferson General Hospital,Port Townsend,42,198,35,343,951,951,120,276,34,"1,974","2,899"
+4,96,Skyline Hospital,White Salmon,32,64,58,175,460,561,13,156,19,939,0
+4,102,Yakima Regional Medical Center,Yakima,214,651,178,"1,398","5,173","6,177",451,304,0,"6,273","1,915"
+4,104,Valley General Hospital,Monroe,72,230,110,662,"1,227","3,746",188,666,99,"4,824",0
+4,106,Cascade Valley Hospital,Arlington,48,184,85,449,"1,484","1,484",137,349,85,"5,279",0
+4,107,North Valley Hospital,Tonasket,129,94,52,178,281,"7,441",19,89,23,861,0
+4,108,Tri-State Memorial Hospital,Clarkston,62,343,23,458,"1,643","1,815",232,447,0,"3,566","1,988"
+4,111,East Adams Rural Hospital,Ritzville,20,33,0,43,121,121,0,0,0,222,0
+4,125,Othello Community Hospital,Othello,49,46,184,308,657,657,29,141,137,"1,689",0
+4,126,Highline Community Hospital,Burien,296,"1,071",312,"2,292","6,465","11,766",516,672,258,"14,004",0
+4,128,University of Washington Medical Ctr.,Seattle,450,"1,279","1,264","4,918","24,596","26,738","1,752","1,796",424,"6,693",0
+4,129,Quincy Valley Hospital,Quincy,25,25,5,40,96,"1,616",0,0,0,682,0
+4,130,Northwest Hospital,Seattle,323,"1,239",144,"2,304","7,227","9,759",738,0,228,"8,949",0
+4,131,Overlake Hospital Medical Center,Bellevue,322,"1,502",469,"4,584","14,664","15,750","1,448","1,809","1,047","12,747",0
+4,132,Saint Clare Hospital,Tacoma,106,704,253,"1,677","6,684","6,684",433,741,0,"10,977",0
+4,134,Island Hospital,Anacortes,43,297,112,692,"2,316","2,316",249,893,93,"2,564",0
+4,137,Lincoln Hospital,Davenport,95,135,153,391,379,"6,783",26,116,0,563,0
+4,138,Stevens Healthcare,Edmonds,217,804,353,"2,056","7,038","8,508",551,857,293,"10,982",0
+4,139,Holy Family Hospital ,Spokane,272,"1,192",510,"2,786","10,798","10,798",730,"3,369",288,"15,775",0
+4,140,Kittitas Valley Community Hospital,Kittitas,50,113,69,301,852,879,58,446,92,"2,577","3,234"
+4,141,Dayton General Hospital,Dayton,28,32,1,39,84,536,0,0,0,327,0
+4,142,Harrison Memorial Hospital,Bremerton,297,"1,975",553,"4,148","14,856","14,856","1,523","1,372",492,"17,211","6,625"
+4,145,Saint Joseph Hospital-Bellingham,Bellingham,253,"1,426",584,"3,660","11,808","14,423","1,233",437,491,"13,646",0
+4,147,Mid-Valley Hospital,Omak,44,134,138,409,"1,045","1,068",116,261,65,"1,807",0
+4,148,Kindred Hospital Seattle,Seattle,80,36,15,72,"1,944","1,944",0,0,0,0,0
+4,150,Coulee Community Hospital,Grand Coulee,25,44,19,84,236,"1,533",13,50,21,705,0
+4,152,Mason General Hospital,Shelton,68,213,129,469,"1,482","1,482",105,232,69,"4,994",0
+4,153,Whitman Hospital and Medical Center,Colfax,48,138,24,227,840,901,82,166,15,755,0
+4,155,Valley Medical Center,Renton,303,"1,136",609,"3,895","13,155","13,155","1,134","1,584",895,"17,636",0
+4,156,Whidbey General Hospital,Coupeville,25,391,85,467,"1,526","1,526",158,716,49,"3,602","2,696"
+4,157,Saint Luke's Rehabilitation Institute,Spokane,102,282,22,408,"5,783","5,783",0,0,0,0,0
+4,158,Cascade Medical Center,Leavenworth,12,44,0,45,67,219,0,0,0,648,0
+4,159,Providence St. Peter Hospital,Olympia,390,"2,469",535,"4,686","17,720","20,394","1,192",764,508,"15,398",0
+4,161,Kadlec Medical Center,Richland,188,844,680,"2,457","9,251","9,913",946,618,457,"10,729",0
+4,162,Sacred Heart Medical Center,Spokane,623,"2,524","1,648","7,238","29,733","35,374","2,025","1,046",701,"15,715",0
+4,164,Evergreen Hospital Medical Center,Kirkland,244,"1,145",339,"3,865","12,639","13,230","1,020",866,"1,122","12,608","11,064"
+4,165,Lake Chelan Community Hospital,Chelan,34,58,22,176,"1,053","1,103",7,92,24,885,0
+4,167,Ferry County Memorial Hospital,Republic,25,42,6,54,102,"1,265",0,0,0,468,0
+4,168,Central Washington Hospital,Wenatchee,206,"1,249",468,"2,527","8,699","10,073",740,"1,720",336,"7,148",0
+4,170,Southwest Washington Medical Ctr,Vancouver,360,"1,985",896,"5,312","19,656","21,832","1,426","2,188",944,"22,367","6,418"
+4,172,Pullman Memorial Hospital,Pullman,42,102,54,389,"1,190","1,204",170,0,87,"2,097",0
+4,173,Morton General Hospital,Morton,31,70,29,154,353,"1,877",17,56,12,"1,056",0
+4,175,Mary Bridge Children's Hospital,Tacoma,72,0,461,927,"3,455","3,455",275,0,0,"6,368",0
+4,176,Tacoma General Allenmore Hospital,Tacoma,521,"1,431","1,160","4,509","21,483","21,483","1,175",0,736,"13,458",0
+4,178,Deer Park Hospital,Deer Park,25,31,7,43,56,966,0,0,0,"1,131",0
+4,180,Valley Hospital and Medical Center,Spokane,123,526,212,"1,204","4,646","4,646",797,0,130,"7,553",0
+4,183,Auburn Regional Medical Center,Auburn,149,767,211,"1,715","5,516","7,540",431,505,234,"9,667",0
+4,186,Mark Reed Hospital,McCleary,24,9,0,9,17,17,0,0,0,"1,517",0
+4,191,Providence Centralia Hospital,Centralia,191,548,114,"1,318","2,968","4,361",306,317,127,"7,336",0
+4,193,Mount Carmel Hospital,Colville,50,148,102,291,"1,006","1,059",60,232,53,"1,813",0
+4,194,Saint Joseph's Hospital-Chewelah,Chewelah,65,127,30,200,587,"4,328",18,158,17,"1,089",0
+4,195,Snoqualmie Valley Hospital,Snoqualmie,28,59,1,83,122,693,0,105,0,993,0
+4,197,Capital Medical Center,Olympia,119,363,155,"1,146","3,451","3,451",498,595,189,"3,498",0
+4,198,Sunnyside Community Hospital,Sunnyside,38,120,191,409,"1,037","1,037",381,507,164,"3,997",0
+4,199,Toppenish Community Hospital,Toppenish,63,118,233,572,"1,480","1,480",91,172,131,"4,786",0
+4,201,Saint Francis Hospital,Federal Way,110,564,319,"1,920","5,951","6,590",437,"1,392",359,"11,286",0
+4,202,Regional Hospital,Tukwila,27,27,0,36,"2,031","2,031",0,0,0,0,0
+4,204,Seattle Cancer Care Alliance,Seattle,20,9,9,97,"1,049","1,049",2,0,0,0,0
+4,205,Wenatchee Valley Hospital,Wenatchee,20,106,20,268,387,854,258,"1,247",0,0,0
+4,206,United General Hospital,Sedro Woolley,97,234,47,399,"1,020","1,650",43,374,0,"3,897",0
+4,207,Skagit Valley Hospital,Mt. Vernon,137,533,498,"1,763","5,627","6,402",675,750,298,"6,911",0
+4,208,Legacy Salmon Creek Hospital,Vancouver,165,646,534,"2,063","7,429","7,429",505,694,397,"9,440",0
+4,904,BHC Fairfax Hospital,Kirkland,133,55,141,515,"5,463","5,463",0,0,0,0,0
+4,915,Lourdes Counseling Center,Richland,32,28,90,158,0,"2,120",0,0,0,0,0
+4,919,West Seattle Psychiatric Hospital,Seattle,40,14,74,150,0,"2,637",0,0,0,0,0
