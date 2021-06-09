@@ -24,20 +24,21 @@ options(width = Sys.getenv('COLUMNS'), tigris_use_cache = TRUE, gargle_oob_defau
 
 ## CA ACS Data process by UDP (source from tiny census in R) ====
 # 2010-2019 
-
-## DONT HAVE DECENNIAL (2000) DATA DO WE NEED IT? ====
+ca_acs <- readRDS("../hprm_data/census/ca_acs.rds")
+## DONT HAVE DECENNIAL (2000) DATA DO WE NEED IT?
 
 ## Join acs data with spatial data (from download_data.R, ca_tracts)
 ca_tracts_acs <-
   left_join(
     readRDS("../data/census/CA_tracts.rds"),
-    readRDS("../data/census/ca_acs.rds"),
+    ca_acs,
     by = "GEOID")
 
+# Filter for SF
 sf_tracts <-
   left_join(
     readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
-    readRDS("../data/census/ca_acs.rds"),
+    ca_acs,
     by = "GEOID")
 
 ## Unemployment ----
@@ -57,7 +58,7 @@ sf_tracts <-
 ## Eviction (SF ONLY) ----
 
 # Pull straight from clean UDP data:
-sf_df <- readRDS("../data/output/sf_df.rds")
+sf_df <- readRDS("../hprm_data/output/sf_df.rds")
 
 
 

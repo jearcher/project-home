@@ -28,7 +28,7 @@ evictions_sf[ , year := as.numeric(str_sub(evictions_sf$'File Date',-4,-1))]
 
 
 
-
+]
 # INFOGROUP Data (Private) ----
 # Source: HPRM Drive
 
@@ -46,7 +46,8 @@ drive_download("https://drive.google.com/file/d/1Mdnu6GOMBCoH5G71NiA_nuURso6YVO6
 drive_download("https://drive.google.com/file/d/1gZu5uNM2l0vaJsNsgDT5coBcQSU5_v1p/view?usp=sharing")
 drive_download("https://drive.google.com/file/d/1d9KJVWeRkYiUlDHbMUlHcuFLn64vqPLd/view?usp=sharing")
 drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
-drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
+# this file is repeated, typo? 
+# drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
 
 
 
@@ -61,7 +62,7 @@ setwd('../covid')
 # drive_download("https://drive.google.com/file/d/1VelUbiHKbAsspFVaEID87yrzlJl_gV46/view?usp=sharing", path = "covid_rr_all.csv")
 
 # Data exists in the HPRM repo for covid: (254 'multipolygon's Updated on 03/24/2021)
-covid_sf <- fread("../covid/bay_counties/sf.csv")
+covid_sf <- fread("../../hprm_data/covid/bay_counties/sf.csv")
 
 
 # Unemployment ----
@@ -107,6 +108,10 @@ ca_tracts <-
 
 saveRDS(ca_counties, "../census/CA_counties.rds")
 saveRDS(ca_tracts, "../census/CA_tracts.rds")
+
+# Keep UDPs processed acs data for CA, put in our project repo
+saveRDS(readRDS("../hprm_data/census/ca_acs.rds"),
+        "../data/census/ca_acs.rds")
 
 # there is also a file called "../census/census_wide_ca.csv" which has a bunch of census data (96 vars)
 # Only includes 2000, 2009, 2010, 2012, 2018
