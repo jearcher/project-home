@@ -39,8 +39,25 @@ sf_tracts <-
     readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
     readRDS("../data/census/ca_acs.rds"),
     by = "GEOID")
+
+## Unemployment ----
+
+# No Unemployment Data! UDP has SF data from deepmaps, we may be able 
+# to find unemployment data by census tract?
+
+# https://acsdatacommunity.prb.org/discussion-forum/f/forum/677/unemployment-rate-by-census-tract
+# County level unemployment estimates
+# https://www.bls.gov/lau/#data
+
+## COVID ----
+
+# SF only covid, can find it on sf_df
+ 
+
 ## Eviction (SF ONLY) ----
 
+# Pull straight from clean UDP data:
+sf_df <- readRDS("../data/output/sf_df.rds")
 
 
 
