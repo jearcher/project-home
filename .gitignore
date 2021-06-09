@@ -1,3 +1,6 @@
+# No need to store HPRM data here
+hprm_data/
+
 # icloud backups
 *.icloud
 
