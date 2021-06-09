@@ -13,9 +13,9 @@ drive_auth(use_oob = TRUE)
 
 1
 
-#############
-# Evictions #
-############# Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
+
+# Evictions ----
+# Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
 # UDP Google drive ahs SF evictions
 drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
 evictions_sf <- fread("../data/evictions/sf_20210331.csv")
@@ -27,9 +27,10 @@ evictions_sf[ , year := as.numeric(str_sub(evictions_sf$'File Date',-4,-1))]
 
 
 
-############################
-# INFOGROUP Data (Private) #
-############################ Source: HPRM Drive
+
+
+# INFOGROUP Data (Private) ----
+# Source: HPRM Drive
 
 setwd("../data/infogroup/")
 # This looks like household mobility, must join by GEOID
@@ -47,9 +48,10 @@ drive_download("https://drive.google.com/file/d/1d9KJVWeRkYiUlDHbMUlHcuFLn64vqPL
 drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
 drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
 
-##############
-# COVID DATA #
-############## Source: HPRM Drive
+
+
+# COVID DATA ----
+# Source: HPRM Drive
 
 setwd('../covid')
 
@@ -61,38 +63,37 @@ setwd('../covid')
 # Data exists in the HPRM repo for covid: (254 'multipolygon's Updated on 03/24/2021)
 covid_sf <- fread("../covid/bay_counties/sf.csv")
 
-################
-# Unemployment #
-################
+
+# Unemployment ----
+
 
 # Dont have access to this file, also it is not current in the Repo
 # drive_download("https://drive.google.com/file/d/1-5qApELgxM8fJge97LvJdOy6jT-r0tON/view?usp=sharing", path = "~/data/unemployment/deepmaps_total_long.csv.bz2")
 
 
-###############
-# Census Data #
-###############
+
+
+# Census Data ----
 
 # Note found, but I think we can build it below
-#drive_download("https://drive.google.com/file/d/13sZl_rMLMiKJs0Lnp6Chabm33q4cs_h3/view?usp=sharing", path = "~/data/census/US_tracts_sf.rds")
+# drive_download("https://drive.google.com/file/d/13sZl_rMLMiKJs0Lnp6Chabm33q4cs_h3/view?usp=sharing", path = "~/data/census/US_tracts_sf.rds")
 
-# ms_simplify(): https://www.rdocumentation.org/packages/rmapshaper/versions/0.4.5/topics/ms_simplify
-
-us_states <- states() %>% pull(STATEFP) %>% unique()
-us_counties <- counties()
 
 # This Code downloads ALL Us tracts
-# ---------------------------
+
+# us_states <- states() %>% pull(STATEFP) %>% unique()
+# us_counties <- counties()
 # us_tracts <-
 #   map_df(us_states, function(state){
 #     tracts(state = state, cb = TRUE)
 #   }) %>%
 #   ms_simplify(keep = 0.7)
-# ---------------------------
+
 
 # CA only
 ca_tracts <- 
   tracts(state = 06, cb = TRUE) %>% ms_simplify(keep = 0.7)
+# ms_simplify(): https://www.rdocumentation.org/packages/rmapshaper/versions/0.4.5/topics/ms_simplify
 ca_counties <-
   counties(state = 06)
 
@@ -104,12 +105,14 @@ ca_tracts <-
   st_set_geometry(NULL) %>%
   left_join(ca_tracts %>% select(GEOID), .)
 
-saveRDS(us_counties, "~/data/census/CA_counties.rds")
-saveRDS(us_tracts, "~/data/census/CA_tractts.rds")
+saveRDS(ca_counties, "../census/CA_counties.rds")
+saveRDS(ca_tracts, "../census/CA_tracts.rds")
 
 # there is also a file called "../census/census_wide_ca.csv" which has a bunch of census data (96 vars)
 # Only includes 2000, 2009, 2010, 2012, 2018
 # ca_census <- fread("../census/census_wide_ca.csv")
+
+# ACS Data
 
 
 
