@@ -28,7 +28,7 @@ evictions_sf[ , year := as.numeric(str_sub(evictions_sf$'File Date',-4,-1))]
 
 
 
-]
+
 # INFOGROUP Data (Private) ----
 # Source: HPRM Drive
 
@@ -113,6 +113,10 @@ saveRDS(ca_tracts, "../census/CA_tracts.rds")
 saveRDS(readRDS("../hprm_data/census/ca_acs.rds"),
         "../data/census/ca_acs.rds")
 
+
+ca_acs <- readRDS("../hprm_data/census/ca_acs.rds")
+
+ca_acs %>% count(year)
 # there is also a file called "../census/census_wide_ca.csv" which has a bunch of census data (96 vars)
 # Only includes 2000, 2009, 2010, 2012, 2018
 # ca_census <- fread("../census/census_wide_ca.csv")
@@ -120,4 +124,7 @@ saveRDS(readRDS("../hprm_data/census/ca_acs.rds"),
 # ACS Data
 
 
+
+
+# CDC Data ----
 
