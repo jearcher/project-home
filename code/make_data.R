@@ -142,4 +142,8 @@ ca_df <- left_join(ca_tracts_acs %>% filter(year>=2016), ca_unemp, by = c('Tract
 
 write_csv(ca_df, file = "../data/processed/ca_df.csv")
 
+####
+
+ca_df <- read_csv("../data/processed/ca_df.csv")
+
 sf_check <- ca_df %>% filter(COUNTYFP == "075")
