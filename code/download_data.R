@@ -54,7 +54,7 @@ drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIbli
 # COVID DATA ----
 # Source: HPRM Drive
 
-setwd('../covid')
+# setwd('../covid')
 
 # This file does not exist from the link
 # Says "You need Access" when I put the link in a browser
@@ -62,7 +62,7 @@ setwd('../covid')
 # drive_download("https://drive.google.com/file/d/1VelUbiHKbAsspFVaEID87yrzlJl_gV46/view?usp=sharing", path = "covid_rr_all.csv")
 
 # Data exists in the HPRM repo for covid: (254 'multipolygon's Updated on 03/24/2021)
-covid_sf <- fread("../../hprm_data/covid/bay_counties/sf.csv")
+# covid_sf <- fread("../../hprm_data/covid/bay_counties/sf.csv")
 
 
 # Unemployment ----
@@ -106,8 +106,8 @@ ca_tracts <-
   st_set_geometry(NULL) %>%
   left_join(ca_tracts %>% select(GEOID), .)
 
-saveRDS(ca_counties, "../census/CA_counties.rds")
-saveRDS(ca_tracts, "../census/CA_tracts.rds")
+saveRDS(ca_counties, "../data/census/CA_counties.rds")
+saveRDS(ca_tracts, "../data/census/CA_tracts.rds")
 
 # Keep UDPs processed acs data for CA, put in our project repo
 # 2010-2019
