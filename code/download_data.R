@@ -110,13 +110,19 @@ saveRDS(ca_counties, "../census/CA_counties.rds")
 saveRDS(ca_tracts, "../census/CA_tracts.rds")
 
 # Keep UDPs processed acs data for CA, put in our project repo
-saveRDS(readRDS("../hprm_data/census/ca_acs.rds"),
-        "../data/census/ca_acs.rds")
+# 2010-2019
+ca_acs <- readRDS("../data/census/ca_acs.rds")
 
 
-ca_acs <- readRDS("../hprm_data/census/ca_acs.rds")
+#### In Progress ====
 
-ca_acs %>% count(year)
+# Need to add unemployment ACS data to ca_acs data
+
+
+unemp_vars <- c("B23025_003E","B23025_004E","B23025_005E")
+unemp_years <- c(2016:2019)
+
+
 # there is also a file called "../census/census_wide_ca.csv" which has a bunch of census data (96 vars)
 # Only includes 2000, 2009, 2010, 2012, 2018
 # ca_census <- fread("../census/census_wide_ca.csv")
