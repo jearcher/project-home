@@ -1,3 +1,6 @@
+# Some data files are too large
+data/
+
 # No need to store HPRM data here
 hprm_data/
 
