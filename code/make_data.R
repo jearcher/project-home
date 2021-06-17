@@ -31,7 +31,7 @@ ca_acs <- readRDS("../data/census/ca_acs.rds")
 ## Join acs data with spatial data (from download_data.R, ca_tracts)
 ca_tracts_acs <-
   left_join(
-    readRDS("../data/census/CA_tracts.rds"),
+    readRDS(""),
     ca_acs,
     by = "GEOID") %>% 
   select(!ends_with("M")) %>%
