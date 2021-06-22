@@ -1,0 +1,99 @@
+[class*=illustration-] {
+	position: relative;
+
+	&::after {
+		pointer-events: none;
+	}
+}
+
+[class*=illustration-element-]::after {
+	z-index: -1;
+}
+
+[class*=illustration-section-]::after {
+	z-index: -2;
+}
+
+// Hero illustration
+.illustration-section-01::after {
+	@include illustration('illustration-section-01.svg', 100%, 684px, top);
+}
+
+// Signin illustration
+.illustration-section-02 {
+
+	&::before {
+		@include illustration('illustration-section-02.svg', 100%, 472px, top);
+	}
+
+	&::after {
+		@include illustration('illustration-section-02b.svg', 100%, 291px, bottom);
+	}
+}
+
+// Pricing section illustration
+.illustration-section-03::after {
+	@include illustration('illustration-section-03.svg', 100%, 457px, bottom, null, -66px);
+}
+
+// Testimonials section illustration
+.illustration-section-04::after {
+	@include illustration('illustration-section-04.svg', 200%, 637px, center, null, 15px);
+}
+
+// Generic section illustrations
+.illustration-section-05::after {
+	@include illustration('illustration-section-05.svg', 100%, 406px, bottom, null, -218px);
+}
+
+.illustration-section-06::after {
+	@include illustration('illustration-section-06.svg', 100%, 517px, top, null, -71px);
+}
+
+.illustration-section-07::after {
+	@include illustration('illustration-section-07.svg', 100%, 406px, top, null, 150px);
+}
+
+// Footer illustration
+.illustration-section-08::after {
+	@include illustration('illustration-section-09.svg', 100%, 492px, bottom);
+}
+
+// Behind hero figure
+.illustration-element-01::after {
+	@include illustration('illustration-element-01.svg', 200%, 200%);
+}
+
+// Behind features split image
+.illustration-element-02::after {
+	@include illustration('illustration-element-02.svg', 200%, 200%);
+}
+
+.illustration-element-03::after {
+	@include illustration('illustration-element-03.svg', 200%, 200%);
+}
+
+.illustration-element-04::after {
+	@include illustration('illustration-element-04.svg', 200%, 200%);
+}
+
+// Behind team
+.illustration-element-05::after {
+	@include illustration('illustration-element-05.svg', 200%, 200%);
+}
+
+.illustration-element-06::after {
+	@include illustration('illustration-element-06.svg', 200%, 200%);
+}
+
+.illustration-element-07::after {
+	@include illustration('illustration-element-07.svg', 200%, 200%);
+}
+
+.illustration-element-08::after {
+	@include illustration('illustration-element-08.svg', 200%, 200%);
+}
+
+.illustration-element-09::after {
+	@include illustration('illustration-element-09.svg', 200%, 200%);
+}
