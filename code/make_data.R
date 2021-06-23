@@ -24,14 +24,15 @@ source("../code/functions.R")
 # Data ----
 
 ## CA ACS Data process by UDP (source from tiny census in R) ====
-# 2010-2019 
+# 2010-2019
 ca_acs <- readRDS("../data/census/ca_acs.rds")
+
 ## DONT HAVE DECENNIAL (2000) DATA DO WE NEED IT?
 
 ## Join acs data with spatial data (from download_data.R, ca_tracts)
 ca_tracts_acs <-
   left_join(
-    readRDS("../data/census/CA_tracts.rds"),
+    readRDS("../data/hprm_data/census/CA_tracts.rds"),
     ca_acs,
     by = "GEOID") %>% 
   select(!ends_with("M")) %>%
@@ -55,7 +56,7 @@ sf_tracts <-
 ## Eviction (SF ONLY) ----
 
 # Pull straight from clean UDP data:
-sf_df <- readRDS("../hprm_data/output/sf_df.rds")
+sf_df <- readRDS("../data/hprm_data/output/sf_df.rds")
 
 # set_as_sf() converts object into spatial obj
 # https://r-spatial.github.io/sf/reference/st_as_sf.html
