@@ -21,11 +21,13 @@ library(bit64)
 evict <- fread("hprm_data/evictions/evictions_rr_all_usable.csv")
 summary(evict)
 # Many 2016 values, some 2017, why? 
-evict %>% count(Year)
+labeled_regions <- list(unique(dta[ , Region]))
+
+fwrite(labeled_regions, file = "data/evictions/labeled_regions.csv")
 ```
 
 
-### Poverty Data
+### Poverty Data ----
 
 2006-2010. One observation of 9 unnamed variables.
 ```{r}
@@ -35,10 +37,14 @@ View(poverty_2006)
 ```
 
 
-### Crime
+### Test area ----
 
 ```{r}
+dta <- fread("data/evictions/evictions_rr_all.csv")
 
+dta %>% count(Year)
+
+dta %>% count(Region)
 ```
 
 
