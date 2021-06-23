@@ -2,9 +2,11 @@
 
 ### Data
 
-Some data is pulled from the Urban Displacement Project's HPRM [repo](`https://github.com/urban-displacement/hprm.git`).
+Some data is pulled from the Urban Displacement Project's HPRM private [repo](`https://github.com/urban-displacement/hprm.git`).
 
-That data is stored into a folder called `hprm_data` which is not stored on github.
+Census data is pulled from `tidycensus()` API in `R`.
+
+That data is stored into a folder called `data` which is not stored on github.
 
 ### Website
 
