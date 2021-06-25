@@ -148,3 +148,12 @@ write_csv(ca_df, file = "../data/processed/ca_df.csv")
 ca_df <- read_csv("../data/processed/ca_df.csv")
 
 sf_check <- ca_df %>% filter(COUNTYFP == "075")
+
+
+
+
+#####
+
+
+hist(non_ca_df_ev$Evictions/non_ca_df_ev$Total,
+     breaks = 50)
