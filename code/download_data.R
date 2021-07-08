@@ -18,11 +18,13 @@ drive_auth(use_oob = TRUE)
 
 1
 
+# helpers
+source("../code/functions.R")
 
 # Evictions ----
 
 # Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
-# UDP Google drive ahs SF evictions
+# UDP Google drive ahs SF evictions, used later for "SF Evictions" 
 drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
 evictions_sf <- fread("../data/evictions/sf_20210331.csv")
 
@@ -382,6 +384,7 @@ non_ca_df_ev <-
 
 write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
 
+### SF evictions ----
 
 ca_df_ph <- map(
   acs_years,
@@ -393,13 +396,14 @@ ca_df_ph <- map(
 ) %>% 
   map2(acs_years, ~ mutate(.x, id = .y)) %>% 
   reduce(rbind)  %>% # stack each year of data (append)
-  rename('tract' = NAME, 'year' = id) %>%
+  rename('tract' = NAME, 'Year' = id) %>%
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-ca_df <- data.table(ca_df_ph)
+ca_acs <- data.table(ca_df_ph)
 
-fwrite(ca_df, file = "../data/census/ca_acs.csv")
+#### Unlabeled TEST data included here (CA) ----
+fwrite(ca_acs, file = "../data/census/ca_acs.csv")
 
 # Get Sf Tracts
 # Filter for SF, counts estimates as real values
@@ -411,11 +415,9 @@ sf_tracts <-
   select(!ends_with("M")) %>%
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$"))
 
-### SF evictions ----
-
 # Data from 1997-2021
 # Adapted from HPRM, but without certain variables (ev categories)
-evictions_sf <- evictions_sf %>%
+evictions_sf_transformed <- evictions_sf %>%
   # Create Variables
   mutate(
     # remove word "POINT", opening and closing parentheses
@@ -423,9 +425,9 @@ evictions_sf <- evictions_sf %>%
     # Get calendar object from var 'File Date'
     date = mdy(`File Date`),
     year = year(date)) %>%
-  # Make clean_Shape into X and Y coordinates (cars called X and Y)
+  # Make clean_Shape into X and Y coordinates (vars called X and Y)
   separate(clean_Shape, c("X", "Y"), sep = " ") %>%
-  filter(!is.na(Shape)) %>%
+  filter(!is.na(Y)) %>%
   # convert into spatial object??
   st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
   # Spatial Join
@@ -439,9 +441,20 @@ evictions_sf <- evictions_sf %>%
   mutate(
     ev_rate = ev_count/Rent,
     ev_rr = RR(ev_count, Rent)) %>%
+  rename(Year=year) %>%
   ungroup()
 
 
 
+sf_df_ev <- 
+  left_join(
+    evictions_sf_transformed,
+    ca_acs,
+    by = c("GEOID", "Year")
+  ) %>%
+  drop_na(tract) %>%
+  select(!geometry) # may not need geomtery
+  
 
+write_csv(sf_df_ev, file = "../data/processed/sf_df_ev.csv")
 

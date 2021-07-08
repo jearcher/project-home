@@ -17,8 +17,7 @@ devtools::install_github(c("timathomas/neighborhood", "jalvesaq/colorout"))
 pacman::p_load(BAMMtools, classInt, colorout, rmapshaper, neighborhood, lubridate, googledrive, sf, data.table, tigris, tidyverse)
 options(width = Sys.getenv('COLUMNS'), tigris_use_cache = TRUE, gargle_oob_default = TRUE)
 
-# helpers
-source("../code/functions.R")
+
 
 
 # Data ----
