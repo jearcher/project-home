@@ -2,15 +2,13 @@
 
 ### Data
 
-Some data is pulled from the Urban Displacement Project's HPRM private [repo](`https://github.com/urban-displacement/hprm.git`).
+Some data is pulled from the Urban Displacement Project's HPRM [repo](`https://github.com/urban-displacement/hprm.git`).
 
-Census data is pulled from `tidycensus()` API in `R`.
-
-That data is stored into a folder called `data` which is not stored on github.
+That data is stored into a folder called `hprm_data` which is not stored on github.
 
 ### Website
 
-1. From the root directory of this repo, run `cd website/server/HTML`.
+1. From the root directory of this repo, run `cd website/supreme/HTML`. **Next, if launching the website for the first time, follow steps 2 and 3. Otherwise, skip to step 4.**
 
 2. Ensure either node or npm is installed by running `node -v` or `npm -v`. (If neither has been installed yet, go [here](https://www.npmjs.com/get-npm).)
 
