@@ -25,42 +25,13 @@ drive_auth(use_oob = TRUE)
 # UDP Google drive ahs SF evictions
 drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
 evictions_sf <- fread("../data/evictions/sf_20210331.csv")
-# Create Year var
-#  evictions_sf[ , year := as.numeric(str_sub(evictions_sf$'File Date',-4,-1))] # Data from 1997-2021
-# Adapted from HPRM, but without certain variables (ev categories)
-sf_ev <- read_csv("../data/evictions/sf_20210331.csv") %>%
-  # Create Variables
-  mutate(
-    # remove word "POINT", opening and closing parentheses
-    clean_Shape = str_replace_all(Shape, c("POINT \\(|\\)"), ""),
-    # Get calendar object from var 'File Date'
-    date = mdy(`File Date`),
-    year = year(date)) %>%
-  # Make clean_Shape into X and Y coordinates (cars called X and Y)
-  separate(clean_Shape, c("X", "Y"), sep = " ") %>%
-  filter(!is.na(Shape)) %>%
-  # convert into spatial object??
-  st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
-  # Spatial Join
-  st_join(., sf_tracts %>% select(GEOID), st_intersects) %>%
-  st_set_geometry(NULL) %>%
-  # Gather a eviction count by GEOID and year
-  group_by(GEOID, year) %>%
-  summarize(ev_count = n()) %>%
-  right_join(sf_tracts %>% select(GEOID, Rent), .) %>%
-  # Create eviction rate, relative risk
-  mutate(
-    ev_rate = ev_count/Rent,
-    ev_rr = RR(ev_count, Rent)) %>%
-  ungroup()
-
-
 
 
 
 # Other Eviction Data from HPRM and Eviction Lab, includes 17 metros, 2016 and some 2017
 drive_download("https://drive.google.com/file/d/1c46stmOznc84YdLmCBly1eUzI-vc6bwz/view?usp=sharing", path = "../data/evictions/evictions_rr_all.csv")
 evictions_rr <- fread("../data/evictions/evictions_rr_all.csv") 
+
 # Need GEOID as character for later joining, then need to put the leading 0 back in
 evictions_rr <- evictions_rr[, GEOID := paste("0", as.character(GEOID), sep = "")]
 
@@ -408,6 +379,7 @@ non_ca_df_ev <-
   ) %>%
   drop_na(Year)
 
+
 write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
 
 
@@ -428,3 +400,48 @@ ca_df_ph <- map(
 ca_df <- data.table(ca_df_ph)
 
 fwrite(ca_df, file = "../data/census/ca_acs.csv")
+
+# Get Sf Tracts
+# Filter for SF, counts estimates as real values
+sf_tracts <-
+  left_join(
+    readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
+    ca_acs,
+    by = "GEOID") %>% 
+  select(!ends_with("M")) %>%
+  rename_at(vars(ends_with("E")), ~ str_remove(., "E$"))
+
+### SF evictions ----
+
+# Data from 1997-2021
+# Adapted from HPRM, but without certain variables (ev categories)
+evictions_sf <- evictions_sf %>%
+  # Create Variables
+  mutate(
+    # remove word "POINT", opening and closing parentheses
+    clean_Shape = str_replace_all(Shape, c("POINT \\(|\\)"), ""),
+    # Get calendar object from var 'File Date'
+    date = mdy(`File Date`),
+    year = year(date)) %>%
+  # Make clean_Shape into X and Y coordinates (cars called X and Y)
+  separate(clean_Shape, c("X", "Y"), sep = " ") %>%
+  filter(!is.na(Shape)) %>%
+  # convert into spatial object??
+  st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
+  # Spatial Join
+  st_join(., sf_tracts %>% select(GEOID), st_intersects) %>%
+  st_set_geometry(NULL) %>%
+  # Gather a eviction count by GEOID and year
+  group_by(GEOID, year) %>%
+  summarize(ev_count = n()) %>%
+  right_join(sf_tracts %>% select(GEOID, Rent), .) %>%
+  # Create eviction rate, relative risk
+  mutate(
+    ev_rate = ev_count/Rent,
+    ev_rr = RR(ev_count, Rent)) %>%
+  ungroup()
+
+
+
+
+

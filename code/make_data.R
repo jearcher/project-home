@@ -155,5 +155,5 @@ sf_check <- ca_df %>% filter(COUNTYFP == "075")
 #####
 
 
-hist(non_ca_df_ev$Evictions/non_ca_df_ev$Total,
+#hist(non_ca_df_ev$Evictions/non_ca_df_ev$Total,
      breaks = 50)
