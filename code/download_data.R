@@ -5,39 +5,39 @@
 # If using RStdio use this:
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
+rm(list = ls()) # remove objects in environment
+
 # Packages
 if(!require(pacman)) install.packages('pacman')
-pacman::p_load(colorout, tidycensus, googledrive, sf, tigris, rmapshaper, tidyverse, data.table)
+if(!require(devtools)) install.packages('devtools')
+devtools::install_github(c("timathomas/neighborhood", "jalvesaq/colorout"))
+
+pacman::p_load(BAMMtools, classInt, colorout, tidycensus, googledrive, sf, tigris, rmapshaper, tidyverse, data.table, neighborhood, lubridate)
 options(gargle_oob_default = TRUE, scipen=10, tigris_use_cache = TRUE) # avoid scientific notation, oob = out-of-bound auth, set to TRUE when using RStudio Server
 drive_auth(use_oob = TRUE)
 
 1
 
+# helpers
+source("../code/functions.R")
 
 # Evictions ----
+
 # Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
-# UDP Google drive ahs SF evictions
+# UDP Google drive ahs SF evictions, used later for "SF Evictions" 
 drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
 evictions_sf <- fread("../data/evictions/sf_20210331.csv")
-# Create Year var
-evictions_sf[ , year := as.numeric(str_sub(evictions_sf$'File Date',-4,-1))]
-# Data from 1997-2021
-#evictions_sf %>% count(year)
-#hist(evictions_sf$year)
+
+
 
 # Other Eviction Data from HPRM and Eviction Lab, includes 17 metros, 2016 and some 2017
 drive_download("https://drive.google.com/file/d/1c46stmOznc84YdLmCBly1eUzI-vc6bwz/view?usp=sharing", path = "../data/evictions/evictions_rr_all.csv")
 evictions_rr <- fread("../data/evictions/evictions_rr_all.csv") 
+
 # Need GEOID as character for later joining, then need to put the leading 0 back in
 evictions_rr <- evictions_rr[, GEOID := paste("0", as.character(GEOID), sep = "")]
 
-
-
-
-
-
 # Census Data ----
-
 # This Code downloads ALL US tracts
 
 us_states <- states() %>% pull(STATEFP) %>% unique()
@@ -59,19 +59,16 @@ us_tracts <-
 saveRDS(us_tracts, "../data/census/us_tracts.rds")
 
 
-
-
-
-# I want to download all the ACS data at once
+# Download all the ACS data at once
 # Some of this is adapted from HPRM
 
 # PLAN
 # - Find 17 metros with Evictions Data
-# - Download the ACS data for each county represented by 17 metros (except CA, download all state)
+# - Download the ACS data for each state represented by 17 metros (except CA, download all state)
 # - join evictions and ACS data
 # - Drop any rows with NA in evicitons column (this yields our training set)
 
-##### This is HPRM code, slight adjustments to the variables desired
+##### This variable labeling is HPRM code, slight adjustments to the variables desired
 acs_vars = c(
   'Total' = 'B25003_001',
   'Rent' = 'B25003_003',
@@ -167,17 +164,14 @@ acs_vars = c(
   'unemployed' = 'B23025_005E'
 )
 
-
 # Start with only 2 years to cut processing time during code-writing
-
 # acs_years <- c(2016:2019)
 acs_years <- c(2016:2017)
 
 # Metros with labeled evicitons data (via evicions_rr_all.csv)
-metros <- read_csv("../data/evictions/labeled_regions.csv", col_names = "Region")
+# metros <- read_csv("../data/evictions/labeled_regions.csv", col_names = "Region")
 
-# Denver, CO ====
-
+#### Colorado
 colorado_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -192,22 +186,7 @@ colorado_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-
-denver_df <- 
-  left_join(
-  evictions_rr[ , evictions_rr[Region=="Denver"]],
-  colorado_df_ph,
-  by = c("GEOID", "Year")
-  ) %>%
-  drop_na(Year)
-
-fwrite(denver_df, file = "../data/processed/denver_df_ev.csv")
-
-
-
-#### In Progress ====
-
-# Orlando, Florida ====
+#### Florida
 florida_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -222,16 +201,7 @@ florida_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-
-# Miami, Florida ====
-
-
-# Tampa Bay, FL ====
-
-
-
-# Atlanta, GA
-
+#### Georgia
 georgia_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -246,8 +216,7 @@ georgia_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### Illinois ====
-
+#### Illinois
 illinois_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -262,8 +231,7 @@ illinois_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### Missourri ====
-
+#### Missourri
 missouri_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -295,7 +263,6 @@ kansas_df_ph <- map(
 
 
 #### Massechuessetts (sp?!?!?)
-
 mass_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -310,8 +277,7 @@ mass_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### North Carolina ====
-
+#### North Carolina
 nc_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -326,8 +292,7 @@ nc_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### Ohio ====
-
+#### Ohio
 ohio_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -343,8 +308,7 @@ ohio_df_ph <- map(
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
 
-#### Oklahoma ====
-
+#### Oklahoma
 oklahoma_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -360,7 +324,6 @@ oklahoma_df_ph <- map(
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
 #### South Carolina
-
 sc_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -375,9 +338,7 @@ sc_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-
-#### Virginia ====
-
+#### Virginia
 virginia_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -392,8 +353,7 @@ virginia_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates
 
-#### Washington ====
-
+#### Washington
 washington_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -410,7 +370,6 @@ washington_df_ph <- map(
 
 #### Put it all together ----
 
-x
 acs_data <- rbind(colorado_df_ph, florida_df_ph, illinois_df_ph, missouri_df_ph, 
                   nc_df_ph, ohio_df_ph, oklahoma_df_ph, virginia_df_ph, washington_df_ph)
 
@@ -422,8 +381,10 @@ non_ca_df_ev <-
   ) %>%
   drop_na(Year)
 
+
 write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
-#################### end test ----
+
+### SF evictions ----
 
 ca_df_ph <- map(
   acs_years,
@@ -435,127 +396,65 @@ ca_df_ph <- map(
 ) %>% 
   map2(acs_years, ~ mutate(.x, id = .y)) %>% 
   reduce(rbind)  %>% # stack each year of data (append)
-  rename('tract' = NAME, 'year' = id) %>%
+  rename('tract' = NAME, 'Year' = id) %>%
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-ca_df <- data.table(ca_df_ph)
+ca_acs <- data.table(ca_df_ph)
 
-fwrite(ca_df, file = "../data/census/ca_acs.csv")
+#### Unlabeled TEST data included here (CA) ----
+fwrite(ca_acs, file = "../data/census/ca_acs.csv")
 
+# Get Sf Tracts
+# Filter for SF, counts estimates as real values
+sf_tracts <-
+  left_join(
+    readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
+    ca_acs,
+    by = "GEOID") %>% 
+  select(!ends_with("M")) %>%
+  rename_at(vars(ends_with("E")), ~ str_remove(., "E$"))
 
-#########3
-ca_unemp <- ca_unemp %>%
-  rename(year = id,
-         labor_force = B23025_003E,
-         employed = B23025_004E,
-         unemployed = B23025_005E,
-         tract = NAME) %>%
-  mutate(unemp_rate = unemployed/labor_force) %>%
-  select(GEOID, tract, unemp_rate, year)
-
-ca_unemp %>% count(year)
-
-
-# GRAVEYARD ----
-
-# # INFOGROUP Data (Private)
-# # Source: HPRM Drive
-# 
-# setwd("../data/infogroup/")
-# # This looks like household mobility, must join by GEOID
-# # vars include: 'GEOID	YEAR	CAT	HH	MOVE_OUT	MOVE_IN	MOVE_WITHIN'
-# # Years 2006-2019
-# drive_download("https://drive.google.com/file/d/1KAgbuDWId_7HZVnEll50ZtUJNAv5M2Jj/view?usp=sharing")
-# drive_download("https://drive.google.com/file/d/16LXkY5aAogWeOkO0Qy3SDB_Uy2dUubOc/view?usp=sharing")
-# drive_download("https://drive.google.com/file/d/1vz7JAwmP9fwpVLCYDamb4z5uH-VXS4yf/view?usp=sharing")
-# drive_download("https://drive.google.com/file/d/1Mdnu6GOMBCoH5G71NiA_nuURso6YVO6R/view?usp=sharing")
-# 
-# # This is 'cumulative', includes move in/ move out *rates*
-# # each file seems to correspond (by GEOID) with its respective file above, 4 with counts for tracts, 4 with 'cumulative"
-# drive_download("https://drive.google.com/file/d/1gZu5uNM2l0vaJsNsgDT5coBcQSU5_v1p/view?usp=sharing")
-# drive_download("https://drive.google.com/file/d/1d9KJVWeRkYiUlDHbMUlHcuFLn64vqPLd/view?usp=sharing")
-# drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
-# # this file is repeated, typo? 
-# # drive_download("https://drive.google.com/file/d/1_2NMXO2kFQuTLAMJw17LQ6Jc53AIblia/view?usp=sharing")
-# 
-
-
-# COVID DATA
-# Source: HPRM Drive
-
-# setwd('../covid')
-
-# This file does not exist from the link
-# Says "You need Access" when I put the link in a browser
-
-# drive_download("https://drive.google.com/file/d/1VelUbiHKbAsspFVaEID87yrzlJl_gV46/view?usp=sharing", path = "covid_rr_all.csv")
-
-# Data exists in the HPRM repo for covid: (254 'multipolygon's Updated on 03/24/2021)
-# covid_sf <- fread("../../hprm_data/covid/bay_counties/sf.csv")
-
-
-# Unemployment
-
-
-# Dont have access to this file, also it is not current in the Repo
-# drive_download("https://drive.google.com/file/d/1-5qApELgxM8fJge97LvJdOy6jT-r0tON/view?usp=sharing", path = "~/data/unemployment/deepmaps_total_long.csv.bz2")
-
-
-# Census
-
-# # CA only
-# ca_tracts <- 
-#   tracts(state = 06, cb = TRUE) %>% ms_simplify(keep = 0.7)
-# # ms_simplify(): https://www.rdocumentation.org/packages/rmapshaper/versions/0.4.5/topics/ms_simplify
-# ca_counties <-
-#   counties(state = 06)
-# 
-# ca_tracts <-
-#   st_join(st_centroid(ca_tracts),
-#           ca_counties %>%
-#             select(CO_GEOID = GEOID, NAMELSAD),
-#           st_intersects) %>%
-#   st_set_geometry(NULL) %>%
-#   left_join(ca_tracts %>% select(GEOID), .)
-# 
-# saveRDS(ca_counties, "../data/census/CA_counties.rds")
-# saveRDS(ca_tracts, "../data/census/CA_tracts.rds")
-
-# # Keep UDPs processed acs data for CA, put in our project repo
-# # 2010-2019
-# ca_acs <- readRDS("../data/census/ca_acs.rds")
+# Data from 1997-2021
+# Adapted from HPRM, but without certain variables (ev categories)
+evictions_sf_transformed <- evictions_sf %>%
+  # Create Variables
+  mutate(
+    # remove word "POINT", opening and closing parentheses
+    clean_Shape = str_replace_all(Shape, c("POINT \\(|\\)"), ""),
+    # Get calendar object from var 'File Date'
+    date = mdy(`File Date`),
+    year = year(date)) %>%
+  # Make clean_Shape into X and Y coordinates (vars called X and Y)
+  separate(clean_Shape, c("X", "Y"), sep = " ") %>%
+  filter(!is.na(Y)) %>%
+  # convert into spatial object??
+  st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
+  # Spatial Join
+  st_join(., sf_tracts %>% select(GEOID), st_intersects) %>%
+  st_set_geometry(NULL) %>%
+  # Gather a eviction count by GEOID and year
+  group_by(GEOID, year) %>%
+  summarize(ev_count = n()) %>%
+  right_join(sf_tracts %>% select(GEOID, Rent), .) %>%
+  # Create eviction rate, relative risk
+  mutate(
+    ev_rate = ev_count/Rent,
+    ev_rr = RR(ev_count, Rent)) %>%
+  rename(Year=year) %>%
+  ungroup()
 
 
 
-# Need to add unemployment ACS data to ca_acs data
+sf_df_ev <- 
+  left_join(
+    evictions_sf_transformed,
+    ca_acs,
+    by = c("GEOID", "Year")
+  ) %>%
+  drop_na(tract) %>%
+  select(!geometry) # may not need geomtery
+  
 
-## This was for just california
-# 
-# unemp_vars <- c("B23025_003E","B23025_004E","B23025_005E")
-# unemp_years <- c(2016:2019)
-# 
-# ca_unemp <- map(
-#   unemp_years,
-#   ~ get_acs(geography = "tract",
-#             variables = unemp_vars,
-#             year = .x,
-#             state = "06",
-#             output = "wide")
-#   ) %>% 
-#   map2(unemp_years, ~ mutate(.x, id = .y)) 
-# 
-# ca_unemp <- (reduce(ca_unemp, rbind)) 
-# 
-# ca_unemp <- ca_unemp %>%
-#   rename(year = id,
-#          labor_force = B23025_003E,
-#          employed = B23025_004E,
-#          unemployed = B23025_005E,
-#          tract = NAME) %>%
-#   mutate(unemp_rate = unemployed/labor_force) %>%
-#   select(GEOID, tract, unemp_rate, year)
-# 
-# ca_unemp %>% count(year)
-# 
-# saveRDS(ca_unemp, file = "../data/unemployment/ca_acs_unemp.rds")
+write_csv(sf_df_ev, file = "../data/processed/sf_df_ev.csv")
+
