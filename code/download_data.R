@@ -417,6 +417,28 @@ ca_df_ph <- map(
             variables = acs_vars,
             year = .x,
             state = "06",
+            output = "wide")
+) %>% 
+  map2(ca_years, ~ mutate(.x, id = .y)) %>% 
+  reduce(rbind)  %>% # stack each year of data (append)
+  rename('tract' = NAME, 'Year' = id) %>%
+  select(!ends_with("M")) %>% # remove margins of error
+  rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
+
+
+
+#### Unlabeled TEST data included here (CA) ----
+fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
+
+
+
+### Geo data for mapping
+ca_geometry <- map(
+  ca_years,
+  ~ get_acs(geography = "tract",
+            variables = acs_vars[1],
+            year = .x,
+            state = "06",
             output = "wide",
             geometry = TRUE)
 ) %>% 
@@ -426,12 +448,13 @@ ca_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#ca_acs <- data.table(ca_df_ph)
+drop = 'Total'
+ca_geometry = ca_geometry[,!(names(ca_geometry) %in% drop)]
 
-#### Unlabeled TEST data included here (CA) ----
-fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
+fwrite(ca_geometry, file = "../data/interim/ca_geometry.")
 
 
+###
 # Get Sf Tracts
 # Filter for SF, counts estimates as real values
 sf_tracts <-
