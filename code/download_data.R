@@ -431,7 +431,6 @@ ca_df_ph <- map(
 #### Unlabeled TEST data included here (CA) ----
 fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
 
-fwrite(ca_df_ph, file= '')
 
 # Get Sf Tracts
 # Filter for SF, counts estimates as real values
