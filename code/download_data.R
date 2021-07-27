@@ -34,8 +34,13 @@ evictions_sf <- fread("../data/evictions/sf_20210331.csv")
 drive_download("https://drive.google.com/file/d/1c46stmOznc84YdLmCBly1eUzI-vc6bwz/view?usp=sharing", path = "../data/evictions/evictions_rr_all.csv")
 evictions_rr <- fread("../data/evictions/evictions_rr_all.csv") 
 
-# Need GEOID as character for later joining, then need to put the leading 0 back in
-evictions_rr <- evictions_rr[, GEOID := paste("0", as.character(GEOID), sep = "")]
+# Need GEOID as character for later joining, 
+evictions_rr <- evictions_rr[ , GEOID := as.character(GEOID)]
+# Add leading 0 back into Denver
+evictions_rr <- evictions_rr[Region=="Denver" ,GEOID := paste("0", GEOID, sep = "")]
+
+
+#evictions_rr <- evictions_rr[, GEOID := paste("0", as.character(GEOID), sep = "")]
 
 # Census Data ----
 # This Code downloads ALL US tracts
@@ -161,12 +166,22 @@ acs_vars = c(
   # Added  by project home
   'labor_force' = 'B23025_003E',
   'employed' = 'B23025_004E',
-  'unemployed' = 'B23025_005E'
+  'unemployed' = 'B23025_005E',
+  'PropValue_50' = 'DP04_0080E', # Percent of properties values less than 50k
+  'PropValue_100' = 'DP04_0081E',
+  'PropValue_150' = 'DP04_0082E',
+  'PropValue_200' = 'DP04_0083E',
+  'PropValue_300' = 'DP04_0084E',
+  'PropValue_400' = 'DP04_0084E',
+  'PropValue_500' = 'DP04_0085E',
+  'PropValue_1M' = 'DP04_0086E',
+  'PropValue_over_1M' = 'DP04_0087E',
+  'PropValue_Median' = 'DP04_0088E'
 )
 
 # Start with only 2 years to cut processing time during code-writing
 # acs_years <- c(2016:2019)
-acs_years <- c(2016:2017)
+acs_years <- c(2015:2017)
 
 # Metros with labeled evicitons data (via evicions_rr_all.csv)
 # metros <- read_csv("../data/evictions/labeled_regions.csv", col_names = "Region")
@@ -314,7 +329,7 @@ oklahoma_df_ph <- map(
   ~ get_acs(geography = "tract",
             variables = acs_vars,
             year = .x,
-            state = "39",
+            state = "40",
             output = "wide")
 ) %>% 
   map2(acs_years, ~ mutate(.x, id = .y)) %>% 
@@ -368,21 +383,27 @@ washington_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates
 
+
+
+
 #### Put it all together ----
 
-acs_data <- rbind(colorado_df_ph, florida_df_ph, illinois_df_ph, missouri_df_ph, 
-                  nc_df_ph, ohio_df_ph, oklahoma_df_ph, virginia_df_ph, washington_df_ph)
+acs_data <- rbind(colorado_df_ph, florida_df_ph, georgia_df_ph, illinois_df_ph, 
+                  missouri_df_ph, kansas_df_ph, mass_df_ph, nc_df_ph, ohio_df_ph, 
+                  oklahoma_df_ph, sc_df_ph, virginia_df_ph, washington_df_ph)
+
 
 non_ca_df_ev <- 
   left_join(
     evictions_rr,
     acs_data,
     by = c("GEOID", "Year")
-  ) %>%
-  drop_na(Year)
+  ) %>% drop_na(Year)
 
 
 write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
+
+
 
 ### SF evictions ----
 
@@ -443,7 +464,6 @@ evictions_sf_transformed <- evictions_sf %>%
     ev_rr = RR(ev_count, Rent)) %>%
   rename(Year=year) %>%
   ungroup()
-
 
 
 sf_df_ev <- 
