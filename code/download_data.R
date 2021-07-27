@@ -417,7 +417,8 @@ ca_df_ph <- map(
             variables = acs_vars,
             year = .x,
             state = "06",
-            output = "wide")
+            output = "wide",
+            geometry = TRUE)
 ) %>% 
   map2(ca_years, ~ mutate(.x, id = .y)) %>% 
   reduce(rbind)  %>% # stack each year of data (append)
@@ -425,10 +426,12 @@ ca_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-ca_acs <- data.table(ca_df_ph)
+#ca_acs <- data.table(ca_df_ph)
 
 #### Unlabeled TEST data included here (CA) ----
-fwrite(ca_acs, file = "../data/census/ca_acs.csv")
+fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
+
+fwrite(ca_df_ph, file= '')
 
 # Get Sf Tracts
 # Filter for SF, counts estimates as real values
