@@ -405,17 +405,21 @@ write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
 
 
 
-### SF evictions ----
+### CA Data ----
+
+
+# Recent data 2019, skipping outlier 2020, this is data to predict on
+ca_years = 2019
 
 ca_df_ph <- map(
-  acs_years,
+  ca_years,
   ~ get_acs(geography = "tract",
             variables = acs_vars,
             year = .x,
             state = "06",
             output = "wide")
 ) %>% 
-  map2(acs_years, ~ mutate(.x, id = .y)) %>% 
+  map2(ca_years, ~ mutate(.x, id = .y)) %>% 
   reduce(rbind)  %>% # stack each year of data (append)
   rename('tract' = NAME, 'Year' = id) %>%
   select(!ends_with("M")) %>% # remove margins of error
