@@ -33,6 +33,7 @@ evictions_rr <- evictions_rr[ , GEOID := as.character(GEOID)]
 evictions_rr <- evictions_rr[Region=="Denver" ,GEOID := paste("0", GEOID, sep = "")]
 
 
+#### Census ----
 
 # Download all the ACS data at once
 # Some of this is adapted from HPRM
@@ -207,7 +208,7 @@ illinois_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### Missourri
+#### Missouri
 missouri_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -238,7 +239,7 @@ kansas_df_ph <- map(
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
 
-#### Massechuessetts (sp?!?!?)
+#### Massachusetts 
 mass_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -344,7 +345,7 @@ washington_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates
 
-#### Put it all together ----
+#### Join ACS to Evictions ----
 
 acs_data <- rbind(colorado_df_ph, florida_df_ph, georgia_df_ph, illinois_df_ph, 
                   missouri_df_ph, kansas_df_ph, mass_df_ph, nc_df_ph, ohio_df_ph, 
@@ -363,7 +364,7 @@ write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
 
 
 
-### CA Data ----
+#### CA Data (Unlabeled) ----
 
 
 # Recent data 2019, skipping outlier 2020, this is data to predict on
@@ -384,10 +385,17 @@ ca_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
+# Drop SF County (197 travts)
+# See report for reasons for dropping SF
+
+
+
+ca_no_sf <- ca_df_ph[!grepl("San Francisco County", ca_df_ph$tract), ]
+
 
 
 #### Save Unlabeled CA ACS data----
-fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
+fwrite(ca_no_sf, file = "../data/interim/ca_acs.csv")
 
 
 
@@ -410,8 +418,7 @@ ca_geometry <- map(
 drop = 'Total'
 ca_geometry = ca_geometry[,!(names(ca_geometry) %in% drop)]
 
-fwrite(ca_geometry, file = "../data/interim/ca_geometry.")
-
+saveRDS(ca_geometry, file = "../data/interim/ca_geometry.rds")
 
 
 
