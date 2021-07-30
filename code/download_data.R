@@ -23,14 +23,7 @@ source("../code/functions.R")
 
 # Evictions ----
 
-# Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
-# UDP Google drive ahs SF evictions, used later for "SF Evictions" 
-drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
-evictions_sf <- fread("../data/evictions/sf_20210331.csv")
-
-
-
-# Other Eviction Data from HPRM and Eviction Lab, includes 17 metros, 2016 and some 2017
+# Eviction Data from HPRM and Eviction Lab, includes 17 metros, 2016 and some 2017
 drive_download("https://drive.google.com/file/d/1c46stmOznc84YdLmCBly1eUzI-vc6bwz/view?usp=sharing", path = "../data/evictions/evictions_rr_all.csv")
 evictions_rr <- fread("../data/evictions/evictions_rr_all.csv") 
 
@@ -40,38 +33,9 @@ evictions_rr <- evictions_rr[ , GEOID := as.character(GEOID)]
 evictions_rr <- evictions_rr[Region=="Denver" ,GEOID := paste("0", GEOID, sep = "")]
 
 
-#evictions_rr <- evictions_rr[, GEOID := paste("0", as.character(GEOID), sep = "")]
-
-# Census Data ----
-# This Code downloads ALL US tracts
-
-us_states <- states() %>% pull(STATEFP) %>% unique()
-us_counties <- counties()
-us_tracts <-
-  map_df(us_states, function(state){
-    tracts(state = state, cb = TRUE)
-  })
-  # %>%
-  # ms_simplify(keep = 0.7)
-us_tracts <-
-  st_join(st_centroid(us_tracts),
-          us_counties %>%
-            select(CO_GEOID = GEOID, NAMELSAD),
-          st_intersects) %>%
-  st_set_geometry(NULL) %>%
-  left_join(us_tracts %>% select(GEOID), .)
-
-saveRDS(us_tracts, "../data/census/us_tracts.rds")
-
 
 # Download all the ACS data at once
 # Some of this is adapted from HPRM
-
-# PLAN
-# - Find 17 metros with Evictions Data
-# - Download the ACS data for each state represented by 17 metros (except CA, download all state)
-# - join evictions and ACS data
-# - Drop any rows with NA in evicitons column (this yields our training set)
 
 ##### This variable labeling is HPRM code, slight adjustments to the variables desired
 acs_vars = c(
@@ -179,12 +143,9 @@ acs_vars = c(
   'PropValue_Median' = 'DP04_0088E'
 )
 
-# Start with only 2 years to cut processing time during code-writing
-# acs_years <- c(2016:2019)
+# We have 2016 eviction data with very little 2017 data. 
+# Include 2015 in case we want lag variables (i.e. change in prop value YoY)
 acs_years <- c(2015:2017)
-
-# Metros with labeled evicitons data (via evicions_rr_all.csv)
-# metros <- read_csv("../data/evictions/labeled_regions.csv", col_names = "Region")
 
 #### Colorado
 colorado_df_ph <- map(
@@ -261,7 +222,7 @@ missouri_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates 
 
-#### Kansas (Maybe?)
+#### Kansas 
 kansas_df_ph <- map(
   acs_years,
   ~ get_acs(geography = "tract",
@@ -383,9 +344,6 @@ washington_df_ph <- map(
   select(!ends_with("M")) %>% # remove margins of error
   rename_at(vars(ends_with("E")), ~ str_remove(., "E$")) # keep only estimates
 
-
-
-
 #### Put it all together ----
 
 acs_data <- rbind(colorado_df_ph, florida_df_ph, georgia_df_ph, illinois_df_ph, 
@@ -409,7 +367,8 @@ write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
 
 
 # Recent data 2019, skipping outlier 2020, this is data to predict on
-ca_years = 2019
+# Need to drop SF, we will not make any predictions there
+ca_years = 2019 # Include 2018 if we create lag variables.
 
 ca_df_ph <- map(
   ca_years,
@@ -427,7 +386,7 @@ ca_df_ph <- map(
 
 
 
-#### Unlabeled TEST data included here (CA) ----
+#### Save Unlabeled CA ACS data----
 fwrite(ca_df_ph, file = "../data/interim/ca_acs.csv")
 
 
@@ -454,56 +413,91 @@ ca_geometry = ca_geometry[,!(names(ca_geometry) %in% drop)]
 fwrite(ca_geometry, file = "../data/interim/ca_geometry.")
 
 
-###
-# Get Sf Tracts
-# Filter for SF, counts estimates as real values
-sf_tracts <-
-  left_join(
-    readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
-    ca_acs,
-    by = "GEOID") %>% 
-  select(!ends_with("M")) %>%
-  rename_at(vars(ends_with("E")), ~ str_remove(., "E$"))
-
-# Data from 1997-2021
-# Adapted from HPRM, but without certain variables (ev categories)
-evictions_sf_transformed <- evictions_sf %>%
-  # Create Variables
-  mutate(
-    # remove word "POINT", opening and closing parentheses
-    clean_Shape = str_replace_all(Shape, c("POINT \\(|\\)"), ""),
-    # Get calendar object from var 'File Date'
-    date = mdy(`File Date`),
-    year = year(date)) %>%
-  # Make clean_Shape into X and Y coordinates (vars called X and Y)
-  separate(clean_Shape, c("X", "Y"), sep = " ") %>%
-  filter(!is.na(Y)) %>%
-  # convert into spatial object??
-  st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
-  # Spatial Join
-  st_join(., sf_tracts %>% select(GEOID), st_intersects) %>%
-  st_set_geometry(NULL) %>%
-  # Gather a eviction count by GEOID and year
-  group_by(GEOID, year) %>%
-  summarize(ev_count = n()) %>%
-  right_join(sf_tracts %>% select(GEOID, Rent), .) %>%
-  # Create eviction rate, relative risk
-  mutate(
-    ev_rate = ev_count/Rent,
-    ev_rr = RR(ev_count, Rent)) %>%
-  rename(Year=year) %>%
-  ungroup()
 
 
-sf_df_ev <- 
-  left_join(
-    evictions_sf_transformed,
-    ca_acs,
-    by = c("GEOID", "Year")
-  ) %>%
-  drop_na(tract) %>%
-  select(!geometry) # may not need geomtery
-  
+#### Graveyard ----
 
-write_csv(sf_df_ev, file = "../data/processed/sf_df_ev.csv")
+# Census Data
+# This Code downloads ALL US tracts
 
+# us_states <- states() %>% pull(STATEFP) %>% unique()
+# us_counties <- counties()
+# us_tracts <-
+#   map_df(us_states, function(state){
+#     tracts(state = state, cb = TRUE)
+#   })
+#   # %>%
+#   # ms_simplify(keep = 0.7)
+# us_tracts <-
+#   st_join(st_centroid(us_tracts),
+#           us_counties %>%
+#             select(CO_GEOID = GEOID, NAMELSAD),
+#           st_intersects) %>%
+#   st_set_geometry(NULL) %>%
+#   left_join(us_tracts %>% select(GEOID), .)
+# 
+# saveRDS(us_tracts, "../data/census/us_tracts.rds")
+
+####
+
+# SF Evictions
+# Source: HPRM drive https://drive.google.com/drive/folders/1i68Kt9iadjaRNvqKvf-S1Zkln3EAchcj
+# UDP Google drive ahs SF evictions, used later for "SF Evictions" 
+# drive_download("https://drive.google.com/file/d/1nXuks3Pa3Lh6RZj0mMGJ5533yElb3Ahh/view?usp=sharing", path = "../data/evictions/sf_20210331.csv")
+# evictions_sf <- fread("../data/evictions/sf_20210331.csv")
+
+####
+
+####
+
+# # Get Sf Tracts
+# # Filter for SF, counts estimates as real values
+# sf_tracts <-
+#   left_join(
+#     readRDS("../data/census/CA_tracts.rds") %>% filter(COUNTYFP == "075"),
+#     ca_acs,
+#     by = "GEOID") %>% 
+#   select(!ends_with("M")) %>%
+#   rename_at(vars(ends_with("E")), ~ str_remove(., "E$"))
+# 
+# # Data from 1997-2021
+# # Adapted from HPRM, but without certain variables (ev categories)
+# evictions_sf_transformed <- evictions_sf %>%
+#   # Create Variables
+#   mutate(
+#     # remove word "POINT", opening and closing parentheses
+#     clean_Shape = str_replace_all(Shape, c("POINT \\(|\\)"), ""),
+#     # Get calendar object from var 'File Date'
+#     date = mdy(`File Date`),
+#     year = year(date)) %>%
+#   # Make clean_Shape into X and Y coordinates (vars called X and Y)
+#   separate(clean_Shape, c("X", "Y"), sep = " ") %>%
+#   filter(!is.na(Y)) %>%
+#   # convert into spatial object??
+#   st_as_sf(coords = c("X", "Y"), crs = 4269) %>%
+#   # Spatial Join
+#   st_join(., sf_tracts %>% select(GEOID), st_intersects) %>%
+#   st_set_geometry(NULL) %>%
+#   # Gather a eviction count by GEOID and year
+#   group_by(GEOID, year) %>%
+#   summarize(ev_count = n()) %>%
+#   right_join(sf_tracts %>% select(GEOID, Rent), .) %>%
+#   # Create eviction rate, relative risk
+#   mutate(
+#     ev_rate = ev_count/Rent,
+#     ev_rr = RR(ev_count, Rent)) %>%
+#   rename(Year=year) %>%
+#   ungroup()
+# 
+# 
+# sf_df_ev <- 
+#   left_join(
+#     evictions_sf_transformed,
+#     ca_acs,
+#     by = c("GEOID", "Year")
+#   ) %>%
+#   drop_na(tract) %>%
+#   select(!geometry) # may not need geomtery
+# 
+# 
+# write_csv(sf_df_ev, file = "../data/processed/sf_df_ev.csv")
