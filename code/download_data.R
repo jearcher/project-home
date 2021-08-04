@@ -18,8 +18,8 @@ drive_auth(use_oob = TRUE)
 
 1
 
-# helpers
-source("../code/functions.R")
+# helpers (not needed)
+# source("../code/functions.R")
 
 # Evictions ----
 
@@ -35,8 +35,15 @@ evictions_rr <- evictions_rr[Region=="Denver" ,GEOID := paste("0", GEOID, sep = 
 
 #### Census ----
 
+# View ACS Variables:
+####
+# v17 <- load_variables(2017, "acs5", cache = TRUE)
+# 
+# View(v17)
+####
 # Download all the ACS data at once
 # Some of this is adapted from HPRM
+
 
 ##### This variable labeling is HPRM code, slight adjustments to the variables desired
 acs_vars = c(
