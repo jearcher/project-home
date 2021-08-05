@@ -87,7 +87,8 @@ tooltip = paste(as_sf$NAME, "<br>",
                 "Median Property Value:", as_sf$PropValue_Median, "<br>",
                 "Median Household Income:", as_sf$MedianFamilyIncome, "<br>")
 lflt <- leaflet(data = as_sf,
-                width = "100%")
+                width = "100%",
+                height = "100vh")
 lflt <- addProviderTiles(map = lflt, provider = providers$CartoDB.Positron)
 lflt <- addPolygons(lflt, popup = tooltip,
                 stroke = TRUE,
