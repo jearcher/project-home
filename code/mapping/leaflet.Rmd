@@ -86,7 +86,8 @@ pal <- colorFactor(c("#87dfeb", "yellow", "red"), levels = c("Under 2%", "2%-5%"
 tooltip = paste(as_sf$NAME, "<br>",
                 "Median Property Value:", as_sf$PropValue_Median, "<br>",
                 "Median Household Income:", as_sf$MedianFamilyIncome, "<br>")
-lflt <- leaflet(data = as_sf)
+lflt <- leaflet(data = as_sf,
+                width = "100%")
 lflt <- addProviderTiles(map = lflt, provider = providers$CartoDB.Positron)
 lflt <- addPolygons(lflt, popup = tooltip,
                 stroke = TRUE,
