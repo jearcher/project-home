@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/796611/006625cc7dfc4b1ba7450dbc11d39203
+bundleId: https://api.rpubs.com/api/v1/document/796611/006625cc7dfc4b1ba7450dbc11d39203
+url: http://rpubs.com/akambath/796611
+when: 1628182531.61368
