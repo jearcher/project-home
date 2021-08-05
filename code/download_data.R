@@ -144,11 +144,11 @@ acs_vars = c(
   'PropValue_150' = 'DP04_0082E',
   'PropValue_200' = 'DP04_0083E',
   'PropValue_300' = 'DP04_0084E',
-  'PropValue_400' = 'DP04_0084E',
-  'PropValue_500' = 'DP04_0085E',
-  'PropValue_1M' = 'DP04_0086E',
-  'PropValue_over_1M' = 'DP04_0087E',
-  'PropValue_Median' = 'DP04_0088E'
+  'PropValue_400' = 'DP04_0085E',
+  'PropValue_500' = 'DP04_0086E',
+  'PropValue_1M' = 'DP04_0087E',
+  'PropValue_over_1M' = 'DP04_0088E',
+  'PropValue_Median' = 'DP04_0089E'
 )
 
 # We have 2016 eviction data with very little 2017 data. 

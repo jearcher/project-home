@@ -45,18 +45,49 @@ ca_with_geo <-
     d,
     geo,
     by = "GEOID")
-cols_to_keep_for_map <- c("pred_ev_label", "GEOID", "NAME", "geometry")
+cols_to_keep_for_map <- c("pred_ev_label", "GEOID", "NAME", "PropValue_Median", "MedianFamilyIncome", "geometry")
 ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 # is.data.frame(ca_with_geo)
-without_sf_county <- ca_with_geo[!grepl("San Francisco County", ca_with_geo$NAME),]
 
-as_sf <- st_sf(without_sf_county)
+################################
+# Run 1 of 3 following choices #
+################################
+
+# Removing San Bernardino County
+# without_sb_county <- ca_with_geo[!grepl("San Bernardino County", ca_with_geo$NAME),]
+# 
+# as_sf <- st_sf(without_sb_county)
+
+# unwanted_tracts <- c('104.09', '251', '250', '103', '116', '89.01', 'Census Tract 8,')
+# Removing parts of SB county
+# without_sb_tracts <- ca_with_geo[!grepl('104.09,', ca_with_geo$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('251,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('250,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('103,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('116,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('89.01,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('89.01,', without_sb_tracts$NAME)]
+# without_sb_tracts <- without_sb_tracts[!grepl('Census Tract 8,', without_sb_tracts$NAME)]
+
+# 
+# as_sf <- st_sf(without_sb_tracts)
+
+
+# Keeping San Bernardino County
+as_sf <- st_sf(ca_with_geo)
+
+##############################
+##############################
+
 pal <- colorFactor(c("#87dfeb", "yellow", "red"), levels = c("Under 2%", "2%-5%", "Over 5%"), ordered=FALSE)
 #head(as_sf)
 
+tooltip = paste(as_sf$NAME, "<br>",
+                "Median Property Value:", as_sf$PropValue_Median, "<br>",
+                "Median Household Income:", as_sf$MedianFamilyIncome, "<br>")
 lflt <- leaflet(data = as_sf)
 lflt <- addProviderTiles(map = lflt, provider = providers$CartoDB.Positron)
-lflt <- addPolygons(lflt, popup = ~ str_extract(NAME, "^([^,]*,[^,]*)"),
+lflt <- addPolygons(lflt, popup = tooltip,
                 stroke = TRUE,
                 weight = 0.5,
                 opacity = 1,
