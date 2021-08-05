@@ -82,6 +82,7 @@ as_sf <- st_sf(ca_with_geo)
 pal <- colorFactor(c("#87dfeb", "yellow", "red"), levels = c("Under 2%", "2%-5%", "Over 5%"), ordered=FALSE)
 #head(as_sf)
 
+# str_extract(NAME, "^([^,]*,[^,]*)")
 tooltip = paste(as_sf$NAME, "<br>",
                 "Median Property Value:", as_sf$PropValue_Median, "<br>",
                 "Median Household Income:", as_sf$MedianFamilyIncome, "<br>")
@@ -100,7 +101,7 @@ lflt <- addLegend(lflt, "bottomright",
               values = ~ pred_ev_label,
               title = "Eviction Risk",
               opacity = 1)
-#saveWidget(lflt, "lflt.html", selfcontained=F)
+saveWidget(lflt, "lflt.html", selfcontained=F)
 ```
 
 ```{r}

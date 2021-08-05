@@ -367,7 +367,7 @@ non_ca_df_ev <-
   ) %>% drop_na(Year)
 
 
-write_csv(non_ca_df_ev, file = "../data/processed/non_ca_df_ev.csv")
+write_csv(non_ca_df_ev, file = "../data/interim/non_ca_acs_ev.csv")
 
 
 
