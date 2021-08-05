@@ -1,42 +1,37 @@
 ---
-title: "R Notebook"
-output: html_notebook
+output: html_document
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
 ```{r setup, include=FALSE}
-# install.packages('leaflet')
+#install.packages('leaflet')
 knitr::opts_chunk$set(echo = TRUE)
 library(data.table)
 library(plyr)
 library(dplyr)
-library(stargazer)
 library(tidyverse)
-library(sandwich)
-library(MASS)
 library(leaflet)
+library(leaflet.providers)
 library(tidycensus)
-library(tidyverse)
 library(sf)
 library(stringr)
+library(htmlwidgets)
+library(widgetframe)
+options(warn=1)
 
 census_api_key("c1453f57eb58edb56c8e0cbc2abb2fbbef590208")
 ```
 
-```{r}
-d <- fread("/home/jovyan/project-home/data/ca_with_predictions")
+```{r, include=FALSE}
+d <- fread("/home/jovyan/project-home/data/ca_with_predictions.csv")
 head(d)
 ```
 
-```{r}
+```{r, include=FALSE}
 geoids <- d$GEOID
 head(geoids)
 ```
 
-```{r}
+```{r, include=FALSE}
 geo <- get_acs(geography = "tract",
             variables = c("B19013_001"),
             year = 2019,
@@ -45,13 +40,13 @@ geo <- get_acs(geography = "tract",
             geometry = TRUE)
 ```
 
-```{r}
+```{r, include=FALSE}
 cols_to_keep <- c("GEOID", "NAME", "geometry")
 geo <- geo[cols_to_keep]
 head(geo)
 ```
 
-```{r}
+```{r, include=FALSE}
 geoids_int <- bit64::as.integer64(geo$GEOID)
 geo$GEOID <- geoids_int
 ca_with_geo <- 
@@ -62,32 +57,36 @@ ca_with_geo <-
 cols_to_keep_for_map <- c("pred_ev", "GEOID", "NAME", "geometry")
 ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 # is.data.frame(ca_with_geo)
-head(ca_with_geo)
-```
-
-```{r}
-pal <- colorFactor(topo.colors(2), ca_with_geo$pred_ev)
+without_sf_county <- ca_with_geo[!grepl("San Francisco County", ca_with_geo$NAME),]
+head(without_sf_county)
 ```
 
 
-```{r}
-ca_with_geo %>%
-    # st_transform(crs = "+init=epsg:4326") %>%
-    leaflet(width = "100%") %>%
-    addProviderTiles(provider = "CartoDB.Positron") %>%
-    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
-                stroke = FALSE,
+```{r, include=FALSE}
+as_sf <- st_sf(without_sf_county)
+pal <- colorFactor(c("#87dfeb", "yellow", "red"), levels = c("Under 2%", "2%-5%", "Over 5%"), ordered=FALSE)
+head(as_sf)
+```
+
+
+
+```{r warning=FALSE}
+lflt <- leaflet(data = as_sf)
+lflt <- addProviderTiles(map = lflt, provider = providers$CartoDB.Positron)
+lflt <- addPolygons(lflt, popup = ~ str_extract(NAME, "^([^,]*,[^,]*)"),
+                stroke = TRUE,
+                weight = 0.5,
+                opacity = 1,
+                color = 'black',
                 smoothFactor = 0,
                 fillOpacity = 0.7,
-                color = ~ pal(pred_ev))
-```
-
-
-```{r}
-m <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-m  # Print the map
+                fillColor = ~ pal(pred_ev))
+lflt <- addLegend(lflt, "bottomright", 
+              pal = pal, 
+              values = ~ pred_ev,
+              title = "Eviction Risk",
+              opacity = 1)
+saveWidget(lflt, "leaflet.html", selfcontained = FALSE)
 ```
 
 
