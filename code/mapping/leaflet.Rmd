@@ -20,7 +20,13 @@ library(widgetframe)
 options(warn=1)
 
 census_api_key("c1453f57eb58edb56c8e0cbc2abb2fbbef590208")
-d <- fread("/home/jovyan/project-home/data/ca_with_predictions.csv")
+
+# Set working directory as this files enclosing folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+d <- fread('../../data/processed/ca_with_predictions.csv')
+# Akaash directory
+#d <- fread("/home/jovyan/project-home/data/ca_with_predictions.csv")
 
 geo <- get_acs(geography = "tract",
             variables = c("B19013_001"),
@@ -39,7 +45,7 @@ ca_with_geo <-
     d,
     geo,
     by = "GEOID")
-cols_to_keep_for_map <- c("pred_ev", "GEOID", "NAME", "geometry")
+cols_to_keep_for_map <- c("pred_ev_label", "GEOID", "NAME", "geometry")
 ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 # is.data.frame(ca_with_geo)
 without_sf_county <- ca_with_geo[!grepl("San Francisco County", ca_with_geo$NAME),]
@@ -57,10 +63,10 @@ lflt <- addPolygons(lflt, popup = ~ str_extract(NAME, "^([^,]*,[^,]*)"),
                 color = 'black',
                 smoothFactor = 0,
                 fillOpacity = 0.7,
-                fillColor = ~ pal(pred_ev))
+                fillColor = ~ pal(pred_ev_label))
 lflt <- addLegend(lflt, "bottomright", 
               pal = pal, 
-              values = ~ pred_ev,
+              values = ~ pred_ev_label,
               title = "Eviction Risk",
               opacity = 1)
 #saveWidget(lflt, "lflt.html", selfcontained=F)
