@@ -50,7 +50,7 @@ ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 # is.data.frame(ca_with_geo)
 
 ################################
-# Run 1 of 3 following choices #
+# Run 1 of following choices #
 ################################
 
 # Removing San Bernardino County
@@ -74,7 +74,12 @@ ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 
 
 # Keeping San Bernardino County
-as_sf <- st_sf(ca_with_geo)
+#as_sf <- st_sf(ca_with_geo)
+
+# Removing tracts with median income == 0
+# This includes strange tracts i.e. a marina, drops 113 rows
+as_sf = st_sf(ca_with_geo[!ca_with_geo$MedianFamilyIncome==0])
+
 
 ##############################
 ##############################
@@ -101,7 +106,7 @@ lflt <- addPolygons(lflt, popup = tooltip,
 lflt <- addLegend(lflt, "bottomright", 
               pal = pal, 
               values = ~ pred_ev_label,
-              title = "Eviction Risk",
+              title = "Eviction Rate",
               opacity = 1)
 saveWidget(lflt, "lflt.html", selfcontained=F)
 ```
