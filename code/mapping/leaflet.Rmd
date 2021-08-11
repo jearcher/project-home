@@ -74,11 +74,11 @@ ca_with_geo <- ca_with_geo[, ..cols_to_keep_for_map]
 
 
 # Keeping San Bernardino County
-#as_sf <- st_sf(ca_with_geo)
+as_sf <- st_sf(ca_with_geo)
 
 # Removing tracts with median income == 0
 # This includes strange tracts i.e. a marina, drops 113 rows
-as_sf = st_sf(ca_with_geo[!ca_with_geo$MedianFamilyIncome==0])
+# as_sf = st_sf(ca_with_geo[!ca_with_geo$MedianFamilyIncome==0])
 
 
 ##############################
